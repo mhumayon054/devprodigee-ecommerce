@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-blue: #166cd2;
+  --brand-dark: #2b3543;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: var(--brand-dark); }
+* { box-sizing: border-box; }
+::selection { background: rgba(22, 108, 210, .2); color: #1f2937; }
+
+.container-shell {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.section-space { padding-top: 5rem; padding-bottom: 5rem; }
+.surface-grid {
+  background-image:
+    linear-gradient(rgba(22,108,210,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22,108,210,.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.hero-backdrop {
+  background:
+    radial-gradient(circle at 12% 24%, rgba(22,108,210,.18), transparent 35%),
+    radial-gradient(circle at 88% 18%, rgba(38,198,218,.16), transparent 29%),
+    linear-gradient(135deg, #f8fbff 0%, #eef4fb 52%, #f7fafc 100%);
+}
+.dashboard-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.55), transparent 46%);
+}
+.platform-multi {
+  background: linear-gradient(135deg, #e53238 0 25%, #0064d2 25% 50%, #f5af02 50% 75%, #86b817 75%);
+}
+.field-label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 700;
+  color: #2b3543;
+}
+.field-input {
+  margin-top: .55rem;
+  width: 100%;
+  border-radius: .85rem;
+  border: 1px solid #dbe2ea;
+  background: #f8fafc;
+  padding: .82rem 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+  color: #2b3543;
+  outline: none;
+  transition: .2s ease;
+}
+.field-input:focus {
+  border-color: #166cd2;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(22,108,210,.1);
+}
+.nav-panel { animation: nav-panel-in .2s ease both; }
+@keyframes nav-panel-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 640px) {
+  .container-shell { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .section-space { padding-top: 6rem; padding-bottom: 6rem; }
+}
+@media (min-width: 1024px) {
+  .container-shell { padding-left: 2rem; padding-right: 2rem; }
+}
