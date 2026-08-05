@@ -3,6 +3,14 @@ import { AppIcon } from "@/components/app-icon";
 import { LogoMark } from "@/components/logo-mark";
 import { platforms, services, site } from "@/data/site";
 
+const platformAnchors: Record<string, string> = {
+  Amazon: "amazon",
+  Walmart: "walmart-marketplace",
+  Shopify: "shopify",
+  eBay: "ebay",
+  Etsy: "etsy",
+};
+
 export function SiteFooter() {
   return (
     <footer className="bg-[#202936] text-white">
@@ -13,9 +21,15 @@ export function SiteFooter() {
             <p className="mt-6 max-w-md text-sm font-normal leading-7 text-slate-300">
               Strategy, store development, marketplace management and performance marketing for brands that want sustainable eCommerce growth.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3" aria-label="Supported platforms">
               {platforms.slice(0, 5).map((platform) => (
-                <span key={platform.name} className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-slate-300">{platform.name}</span>
+                <Link
+                  key={platform.name}
+                  href={`/services#platform-${platformAnchors[platform.name] ?? platform.name.toLowerCase()}`}
+                  className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:-translate-y-0.5 hover:border-blue-300/40 hover:bg-white/10 hover:text-white"
+                >
+                  {platform.name}
+                </Link>
               ))}
             </div>
           </div>
@@ -30,17 +44,21 @@ export function SiteFooter() {
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Core Services</h2>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              {services.slice(0, 5).map((service) => <li key={service.slug}><Link href="/services" className="transition hover:text-white">{service.title}</Link></li>)}
+              {services.slice(0, 5).map((service) => (
+                <li key={service.slug}>
+                  <Link href={`/services#${service.slug}`} className="transition hover:text-white">{service.title}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Start a conversation</h2>
             <p className="mt-5 text-sm leading-6 text-slate-300">Tell us where your eCommerce business is today and where you want it to go.</p>
-            <a href={`mailto:${site.email}`} className="mt-5 flex items-center gap-3 text-sm font-semibold text-white hover:text-blue-300">
+            <Link href="/contact#project-enquiry" className="mt-5 flex items-center gap-3 text-sm font-semibold text-white transition hover:text-blue-300">
               <AppIcon name="mail" size={19} /> {site.email}
-            </a>
-            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#166CD2] px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-500">
+            </Link>
+            <Link href="/contact#project-enquiry" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#166CD2] px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-500">
               Book a strategy call <AppIcon name="arrow" size={18} />
             </Link>
           </div>

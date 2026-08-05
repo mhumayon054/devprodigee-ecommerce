@@ -32,7 +32,7 @@ export default function ServicesPage() {
           <SectionHeading eyebrow="Core capabilities" title="Specialist support from strategy through daily execution" description="Choose a focused service or combine capabilities into an ongoing plan tailored to your platforms, catalogue, team and growth stage." align="center" />
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service, index) => (
-              <article id={service.slug} key={service.slug} className="group rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_12px_40px_rgba(43,53,67,0.06)] transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_20px_55px_rgba(22,108,210,0.12)]">
+              <article id={service.slug} key={service.slug} className="scroll-mt-32 group rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_12px_40px_rgba(43,53,67,0.06)] transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_20px_55px_rgba(22,108,210,0.12)]">
                 <div className="flex items-start justify-between gap-5">
                   <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#166CD2]/10 text-[#166CD2] transition group-hover:bg-[#166CD2] group-hover:text-white"><AppIcon name={service.icon as IconName} size={24} /></span>
                   <span className="text-sm font-bold text-slate-200">0{index + 1}</span>
@@ -58,7 +58,7 @@ export default function ServicesPage() {
           <SectionHeading eyebrow="Platform expertise" title="The right service mix for each marketplace and storefront" description="Every platform has different search logic, compliance requirements, customer behaviour and advertising tools. Our work is adapted accordingly." align="center" />
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {platformServices.map((item) => (
-              <article key={item.platform} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+              <article id={`platform-${item.platform.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`} key={item.platform} className="scroll-mt-32 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
                 <div className="flex items-center justify-between gap-4">
                   <h2 className="text-2xl font-bold text-[#2B3543]">{item.platform}</h2>
                   <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#166CD2]"><AppIcon name="store" size={20} /></span>

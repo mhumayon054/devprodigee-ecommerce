@@ -101,9 +101,23 @@ Replace the placeholder mark with your final logo. A recommended approach is to 
 
 ## Contact form behaviour
 
-The current contact form validates the fields and opens the visitor's default email application with the enquiry pre-filled. The destination email is configured in `data/site.ts`.
+The contact form now submits through the server and sends each enquiry directly through Hostinger SMTP. It does not open the visitor's email application. By default, enquiries are delivered to:
 
-For direct server-side delivery, connect the form to a transactional email service or CRM through a Next.js Route Handler or Server Action.
+- `usman@devprodigee.com`
+- `yahya@devprodigee.com`
+
+Configure the SMTP mailbox in your hosting environment using the variables shown in `.env.example`:
+
+```bash
+SMTP_HOST=smtp.hostinger.com
+SMTP_PORT=465
+SMTP_USER=hello@devprodigee.com
+SMTP_PASSWORD=your-mailbox-password
+CONTACT_FROM_EMAIL=hello@devprodigee.com
+CONTACT_TO_EMAILS=usman@devprodigee.com,yahya@devprodigee.com
+```
+
+The SMTP password is intentionally not stored in the ZIP. Add it in Vercel/Hostinger environment variables before deploying.
 
 ## SEO included
 

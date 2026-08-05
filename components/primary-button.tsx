@@ -19,7 +19,7 @@ const variants = {
 };
 
 export function PrimaryButton({ children, href, variant = "primary", arrow = false, className = "", type = "button", ...buttonProps }: Props) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold transition duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-4 ${variants[variant]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold transition duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-4 disabled:pointer-events-none disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`;
   const content = <>{children}{arrow ? <AppIcon name="arrow" size={19} /> : null}</>;
 
   if (href) {

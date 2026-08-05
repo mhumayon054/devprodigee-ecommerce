@@ -26,17 +26,20 @@ Edit structured content in `data/site.ts` instead of duplicating it across pages
 
 Edit `components/logo-mark.tsx`. Keep the outer Link and accessible label, then replace the placeholder elements with a Next Image component.
 
-## Connecting the contact form
+## Contact form delivery
 
-The current form uses a mailto workflow. For server delivery:
+The contact form submits to `app/api/contact/route.ts` and sends the enquiry through Hostinger SMTP. The server validates and sanitises the fields, uses a honeypot for basic bot filtering, and sends the message to the inboxes configured in `CONTACT_TO_EMAILS`.
 
-1. Create `app/api/contact/route.ts` or a Server Action.
-2. Validate and sanitise all incoming fields on the server.
-3. Connect an email provider or CRM using environment variables.
-4. Add spam protection and rate limiting.
-5. Update `components/contact-form.tsx` to submit with `fetch` or the Server Action.
+Required hosting environment variables are documented in `.env.example`:
 
-Never expose secret API keys in variables prefixed with `NEXT_PUBLIC_`.
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_USER`
+- `SMTP_PASSWORD`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_TO_EMAILS`
+
+Never expose the SMTP password or any other secret in variables prefixed with `NEXT_PUBLIC_`.
 
 ## Design rules
 
