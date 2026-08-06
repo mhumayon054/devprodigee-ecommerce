@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { AppIcon } from "@/components/app-icon";
 import { PrimaryButton } from "@/components/primary-button";
 import { ServiceMultiSelect } from "@/components/service-multi-select";
@@ -53,6 +53,8 @@ export function ContactForm() {
   const [loadingStep, setLoadingStep] = useState(-1);
   const [statusMessage, setStatusMessage] = useState("");
   const [serviceError, setServiceError] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const previousProgressTop = useRef<number | null>(null);
 
   useEffect(() => {
     if (submissionState !== "submitting" && submissionState !== "success") return;
@@ -63,6 +65,38 @@ export function ContactForm() {
       document.body.style.overflow = previousOverflow;
     };
   }, [submissionState]);
+
+  useLayoutEffect(() => {
+    if (submissionState !== "submitting") {
+      previousProgressTop.current = null;
+      return;
+    }
+
+    const element = progressRef.current;
+    if (!element) return;
+
+    const currentTop = element.getBoundingClientRect().top;
+    const previousTop = previousProgressTop.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (previousTop !== null && !reduceMotion) {
+      const offset = previousTop - currentTop;
+      if (Math.abs(offset) > 1) {
+        element.animate(
+          [
+            { transform: `translateY(${offset}px)` },
+            { transform: "translateY(0)" },
+          ],
+          {
+            duration: 680,
+            easing: "cubic-bezier(.22, 1, .36, 1)",
+          },
+        );
+      }
+    }
+
+    previousProgressTop.current = currentTop;
+  }, [loadingStep, submissionState]);
 
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -81,10 +115,10 @@ export function ContactForm() {
     setLoadingStep(-1);
 
     const progressTimers = [
-      window.setTimeout(() => setLoadingStep(0), 180),
-      window.setTimeout(() => setLoadingStep(1), 1050),
-      window.setTimeout(() => setLoadingStep(2), 1950),
-      window.setTimeout(() => setLoadingStep(3), 2850),
+      window.setTimeout(() => setLoadingStep(0), 600),
+      window.setTimeout(() => setLoadingStep(1), 1550),
+      window.setTimeout(() => setLoadingStep(2), 2500),
+      window.setTimeout(() => setLoadingStep(3), 3450),
     ];
 
     try {
@@ -99,7 +133,7 @@ export function ContactForm() {
           error: error instanceof Error ? error : new Error("The network request failed."),
         }));
 
-      await wait(3500);
+      await wait(4150);
       const requestResult = await request;
       if (requestResult.error || !requestResult.response) throw requestResult.error;
 
@@ -192,61 +226,80 @@ export function ContactForm() {
       </form>
 
       {overlayVisible ? (
-        <div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-slate-950/45 px-5 py-8 backdrop-blur-[6px]" role="dialog" aria-modal="true" aria-live="polite">
-          <div className="w-full max-w-2xl rounded-[30px] border border-white/40 bg-white/95 p-6 shadow-[0_30px_100px_rgba(0,0,0,0.28)] ring-1 ring-white/60 sm:p-9">
-            {submissionState === "success" ? (
-              <div className="py-5 text-center">
-                <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-600">
-                  <AppIcon name="check" size={32} />
-                </span>
-                <p className="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-[#166CD2]">Enquiry delivered</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-[-0.03em] text-[#2B3543] sm:text-4xl">Thank you. Your project is with our team.</h2>
-                <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-slate-600">Your details have been sent directly to DevProdigee. A team member can now review the opportunity and respond using the email address you provided.</p>
-                <PrimaryButton className="mt-7" onClick={() => setSubmissionState("idle")}>Done</PrimaryButton>
-              </div>
-            ) : (
-              <div>
-                <div className="text-center">
-                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-[#166CD2] ring-1 ring-inset ring-blue-100">
-                    <span className="h-6 w-6 animate-spin rounded-full border-2 border-[#166CD2]/20 border-t-[#166CD2]" />
-                  </span>
-                  <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[#166CD2]">Sending project enquiry</p>
-                  <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[#2B3543] sm:text-3xl">A clear process starts now</h2>
+        <div
+          className="enquiry-overlay fixed inset-0 z-[100] overflow-y-auto px-5"
+          role="dialog"
+          aria-modal="true"
+          aria-live="polite"
+        >
+          <div className="flex min-h-full w-full items-center justify-center py-8">
+          {submissionState === "success" ? (
+            <div className="enquiry-success-state w-full max-w-2xl text-center">
+              <svg className="enquiry-success-mark mx-auto" viewBox="0 0 120 120" aria-hidden="true">
+                <circle className="enquiry-success-glow" cx="60" cy="60" r="48" />
+                <circle className="enquiry-success-circle" cx="60" cy="60" r="42" />
+                <path className="enquiry-success-check" d="M39 61.5 53.5 76 82 46" />
+              </svg>
+              <p className="enquiry-success-copy mt-7 text-xs font-bold uppercase tracking-[0.22em] text-blue-300">Enquiry delivered</p>
+              <h2 className="enquiry-success-copy mx-auto mt-3 max-w-xl text-3xl font-bold tracking-[-0.04em] text-white sm:text-5xl">Thank you. Your project is with our team.</h2>
+              <p className="enquiry-success-copy mx-auto mt-5 max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
+                Your details have been sent directly to DevProdigee. A team member can now review the opportunity and respond using the email address you provided.
+              </p>
+              <button
+                type="button"
+                className="enquiry-success-copy mt-8 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-md transition hover:border-white/35 hover:bg-white/15"
+                onClick={() => setSubmissionState("idle")}
+              >
+                Return to the page
+              </button>
+            </div>
+          ) : (
+            <div ref={progressRef} className="enquiry-progress-stage w-full max-w-2xl">
+              <div className="text-center">
+                <div className="enquiry-loader mx-auto" aria-hidden="true">
+                  <span className="enquiry-loader-track" />
+                  <span className="enquiry-loader-orbit" />
+                  <span className="enquiry-loader-core" />
                 </div>
+                <p className="mt-6 text-xs font-bold uppercase tracking-[0.22em] text-blue-300">Sending project enquiry</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-[-0.04em] text-white sm:text-5xl">A clear process starts now</h2>
+              </div>
 
-                <div className="mt-7 min-h-[250px] space-y-3 sm:min-h-[276px]">
-                  {loadingSteps.map((step, index) => {
-                    if (index > loadingStep) return null;
+              <div className="mt-8 space-y-3">
+                {loadingSteps.map((step, index) => {
+                  if (index > loadingStep) return null;
 
-                    const complete = index < loadingStep || loadingStep === loadingSteps.length;
-                    const active = index === loadingStep && loadingStep < loadingSteps.length;
+                  const complete = index < loadingStep || loadingStep === loadingSteps.length;
+                  const active = index === loadingStep && loadingStep < loadingSteps.length;
 
-                    return (
-                      <div
-                        key={step.title}
-                        className={`loading-step-enter flex gap-4 rounded-2xl border p-4 transition-all duration-300 sm:p-5 ${
-                          complete
-                            ? "border-emerald-100 bg-emerald-50/70"
-                            : active
-                              ? "border-blue-200 bg-blue-50/80 shadow-sm"
-                              : "border-slate-200 bg-slate-50/70"
-                        }`}
-                      >
-                        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xs font-bold transition-all duration-300 ${
-                          complete ? "loading-check-pop bg-emerald-500 text-white" : "bg-[#166CD2] text-white"
-                        }`}>
-                          {complete ? <AppIcon name="check" size={18} /> : `0${index + 1}`}
-                        </span>
-                        <div>
-                          <h3 className="font-bold text-[#2B3543]">{step.title}</h3>
-                          <p className="mt-1 text-xs leading-5 text-slate-600 sm:text-sm">{step.text}</p>
-                        </div>
+                  return (
+                    <div
+                      key={step.title}
+                      className={`loading-step-enter flex gap-4 rounded-2xl border p-4 backdrop-blur-xl transition-all duration-500 sm:p-5 ${
+                        complete
+                          ? "border-emerald-300/35 bg-emerald-400/10 shadow-[0_16px_50px_rgba(16,185,129,0.10)]"
+                          : active
+                            ? "border-blue-300/45 bg-white/10 shadow-[0_18px_60px_rgba(22,108,210,0.18)]"
+                            : "border-white/15 bg-white/[0.07]"
+                      }`}
+                    >
+                      <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border text-xs font-bold transition-all duration-500 ${
+                        complete
+                          ? "loading-check-pop border-emerald-200/60 bg-emerald-400 text-white shadow-[0_0_28px_rgba(52,211,153,0.34)]"
+                          : "border-blue-200/50 bg-[#166CD2] text-white shadow-[0_0_28px_rgba(22,108,210,0.28)]"
+                      }`}>
+                        {complete ? <AppIcon name="check" size={19} /> : `0${index + 1}`}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-white">{step.title}</h3>
+                        <p className="mt-1 text-xs leading-5 text-slate-200 sm:text-sm">{step.text}</p>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
-            )}
+            </div>
+          )}
           </div>
         </div>
       ) : null}

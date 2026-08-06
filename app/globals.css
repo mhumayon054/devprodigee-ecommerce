@@ -82,47 +82,203 @@ body { margin: 0; background: #fff; color: var(--brand-dark); }
   .container-shell { padding-left: 2rem; padding-right: 2rem; }
 }
 
+.enquiry-overlay {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(22, 108, 210, .15), transparent 36%),
+    rgba(5, 12, 24, .80);
+  -webkit-backdrop-filter: blur(16px) saturate(.72);
+  backdrop-filter: blur(16px) saturate(.72);
+  animation: enquiry-overlay-in .28s ease both;
+}
+
+.enquiry-progress-stage {
+  animation: enquiry-stage-in .52s cubic-bezier(.22, 1, .36, 1) both;
+  will-change: transform;
+}
+
+.enquiry-loader {
+  position: relative;
+  width: 76px;
+  height: 76px;
+}
+.enquiry-loader-track,
+.enquiry-loader-orbit,
+.enquiry-loader-core {
+  position: absolute;
+  display: block;
+  border-radius: 9999px;
+}
+.enquiry-loader-track {
+  inset: 5px;
+  border: 2px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 0 34px rgba(22, 108, 210, .16);
+}
+.enquiry-loader-orbit {
+  inset: 5px;
+  border: 2px solid transparent;
+  border-top-color: #60a5fa;
+  border-right-color: rgba(96, 165, 250, .34);
+  animation: enquiry-loader-spin 1s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, .65));
+}
+.enquiry-loader-core {
+  inset: 28px;
+  background: #93c5fd;
+  box-shadow:
+    0 0 0 7px rgba(147, 197, 253, .08),
+    0 0 24px rgba(96, 165, 250, .78);
+  animation: enquiry-loader-pulse 1.25s ease-in-out infinite;
+}
+
 .loading-step-enter {
-  animation: loading-step-enter .42s cubic-bezier(.22, 1, .36, 1) both;
+  animation: loading-step-enter .68s cubic-bezier(.16, 1, .3, 1) both;
 }
 .loading-check-pop {
-  animation: loading-check-pop .3s cubic-bezier(.34, 1.56, .64, 1) both;
+  animation: loading-check-pop .42s cubic-bezier(.34, 1.56, .64, 1) both;
 }
+
+.enquiry-success-state {
+  animation: enquiry-success-state-in .45s cubic-bezier(.22, 1, .36, 1) both;
+}
+.enquiry-success-mark {
+  width: 112px;
+  height: 112px;
+  overflow: visible;
+  filter: drop-shadow(0 0 28px rgba(52, 211, 153, .22));
+}
+.enquiry-success-glow {
+  fill: rgba(52, 211, 153, .08);
+  stroke: rgba(110, 231, 183, .15);
+  stroke-width: 1;
+  transform-origin: center;
+  animation: enquiry-success-glow 1.8s ease-in-out .2s infinite;
+}
+.enquiry-success-circle {
+  fill: none;
+  stroke: #34d399;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 264;
+  stroke-dashoffset: 264;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  animation: enquiry-success-circle-draw .78s cubic-bezier(.65, 0, .35, 1) .12s forwards;
+}
+.enquiry-success-check {
+  fill: none;
+  stroke: #f0fdf4;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 68;
+  stroke-dashoffset: 68;
+  animation: enquiry-success-check-draw .46s cubic-bezier(.65, 0, .35, 1) .82s forwards;
+}
+.enquiry-success-copy {
+  opacity: 0;
+  animation: enquiry-success-copy-in .55s cubic-bezier(.22, 1, .36, 1) 1.08s forwards;
+}
+
 .footer-service-popover {
   animation: footer-popover-in .22s cubic-bezier(.22, 1, .36, 1) both;
   transform-origin: left bottom;
 }
-.platform-nav-item:hover .platform-divider,
-.platform-nav-item:hover + .platform-nav-item .platform-divider {
-  color: #93c5fd;
-  animation: platform-divider-blink .72s steps(2, start) infinite;
-  text-shadow: 0 0 9px rgba(96, 165, 250, .75);
+
+.platform-footer-link {
+  transition: color .2s ease, text-shadow .2s ease;
+}
+.platform-footer-link:hover,
+.platform-footer-link:focus-visible {
+  color: #ffffff;
+  animation: platform-link-blink .8s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(147, 197, 253, .75);
 }
 
-@keyframes loading-step-enter {
-  from { opacity: 0; transform: translateY(14px) scale(.985); }
+@keyframes enquiry-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes enquiry-stage-in {
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+@keyframes enquiry-loader-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes enquiry-loader-pulse {
+  0%, 100% { transform: scale(.72); opacity: .65; }
+  50% { transform: scale(1); opacity: 1; }
+}
+@keyframes loading-step-enter {
+  from {
+    opacity: 0;
+    transform: translateX(88px) scale(.975);
+    filter: blur(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
 @keyframes loading-check-pop {
-  0% { transform: scale(.78); }
-  70% { transform: scale(1.08); }
+  0% { transform: scale(.72); }
+  68% { transform: scale(1.12); }
   100% { transform: scale(1); }
+}
+@keyframes enquiry-success-state-in {
+  from { opacity: 0; transform: translateY(15px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes enquiry-success-circle-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes enquiry-success-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes enquiry-success-glow {
+  0%, 100% { transform: scale(.93); opacity: .55; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+@keyframes enquiry-success-copy-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes footer-popover-in {
   from { opacity: 0; transform: translateY(8px) scale(.97); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
-@keyframes platform-divider-blink {
-  0%, 45% { opacity: 1; }
-  46%, 100% { opacity: .18; }
+@keyframes platform-link-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .45; }
+}
+
+@media (max-width: 639px) {
+  .enquiry-loader {
+    width: 66px;
+    height: 66px;
+  }
+  .enquiry-loader-core { inset: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .enquiry-overlay,
+  .enquiry-progress-stage,
+  .enquiry-loader-orbit,
+  .enquiry-loader-core,
   .loading-step-enter,
   .loading-check-pop,
+  .enquiry-success-state,
+  .enquiry-success-glow,
+  .enquiry-success-circle,
+  .enquiry-success-check,
+  .enquiry-success-copy,
   .footer-service-popover,
-  .platform-nav-item:hover .platform-divider,
-  .platform-nav-item:hover + .platform-nav-item .platform-divider {
+  .platform-footer-link:hover,
+  .platform-footer-link:focus-visible {
     animation: none;
   }
+  .enquiry-success-circle,
+  .enquiry-success-check { stroke-dashoffset: 0; }
+  .enquiry-success-copy { opacity: 1; }
 }

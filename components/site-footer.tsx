@@ -28,7 +28,7 @@ export function SiteFooter() {
                   {index > 0 ? <span className="platform-divider mx-2.5 text-blue-300/45" aria-hidden="true">|</span> : null}
                   <Link
                     href={`/services#platform-${platformAnchors[platform.name] ?? platform.name.toLowerCase()}`}
-                    className="text-xs font-semibold text-slate-300"
+                    className="platform-footer-link text-xs font-semibold text-slate-300"
                   >
                     {platform.name}
                   </Link>
