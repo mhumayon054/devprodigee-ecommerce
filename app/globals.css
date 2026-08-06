@@ -179,19 +179,12 @@ body { margin: 0; background: #fff; color: var(--brand-dark); }
   animation: enquiry-success-copy-in .55s cubic-bezier(.22, 1, .36, 1) 1.08s forwards;
 }
 
-.footer-service-popover {
-  animation: footer-popover-in .22s cubic-bezier(.22, 1, .36, 1) both;
-  transform-origin: left bottom;
-}
-
 .platform-footer-link {
-  transition: color .2s ease, text-shadow .2s ease;
+  transition: color .2s ease;
 }
 .platform-footer-link:hover,
 .platform-footer-link:focus-visible {
   color: #ffffff;
-  animation: platform-link-blink .8s ease-in-out infinite;
-  text-shadow: 0 0 10px rgba(147, 197, 253, .75);
 }
 
 @keyframes enquiry-overlay-in {
@@ -244,15 +237,6 @@ body { margin: 0; background: #fff; color: var(--brand-dark); }
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes footer-popover-in {
-  from { opacity: 0; transform: translateY(8px) scale(.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes platform-link-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .45; }
-}
-
 @media (max-width: 639px) {
   .enquiry-loader {
     width: 66px;
@@ -272,10 +256,7 @@ body { margin: 0; background: #fff; color: var(--brand-dark); }
   .enquiry-success-glow,
   .enquiry-success-circle,
   .enquiry-success-check,
-  .enquiry-success-copy,
-  .footer-service-popover,
-  .platform-footer-link:hover,
-  .platform-footer-link:focus-visible {
+  .enquiry-success-copy {
     animation: none;
   }
   .enquiry-success-circle,

@@ -275,23 +275,19 @@ export function ContactForm() {
                   return (
                     <div
                       key={step.title}
-                      className={`loading-step-enter flex gap-4 rounded-2xl border p-4 backdrop-blur-xl transition-all duration-500 sm:p-5 ${
-                        complete
-                          ? "border-emerald-300/35 bg-emerald-400/10 shadow-[0_16px_50px_rgba(16,185,129,0.10)]"
-                          : active
-                            ? "border-blue-300/45 bg-white/10 shadow-[0_18px_60px_rgba(22,108,210,0.18)]"
-                            : "border-white/15 bg-white/[0.07]"
+                      className={`loading-step-enter flex items-start gap-3 px-1 py-2 transition-all duration-500 sm:gap-4 ${
+                        complete ? "opacity-90" : active ? "opacity-100" : "opacity-80"
                       }`}
                     >
-                      <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border text-xs font-bold transition-all duration-500 ${
+                      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-[10px] font-bold transition-all duration-500 sm:h-9 sm:w-9 ${
                         complete
-                          ? "loading-check-pop border-emerald-200/60 bg-emerald-400 text-white shadow-[0_0_28px_rgba(52,211,153,0.34)]"
-                          : "border-blue-200/50 bg-[#166CD2] text-white shadow-[0_0_28px_rgba(22,108,210,0.28)]"
+                          ? "loading-check-pop bg-emerald-400 text-white shadow-[0_0_20px_rgba(52,211,153,0.28)]"
+                          : "bg-[#166CD2] text-white shadow-[0_0_20px_rgba(22,108,210,0.24)]"
                       }`}>
-                        {complete ? <AppIcon name="check" size={19} /> : `0${index + 1}`}
+                        {complete ? <AppIcon name="check" size={14} /> : `0${index + 1}`}
                       </span>
-                      <div className="min-w-0">
-                        <h3 className="font-bold text-white">{step.title}</h3>
+                      <div className="min-w-0 pt-0.5">
+                        <h3 className="text-sm font-bold text-white sm:text-base">{step.title}</h3>
                         <p className="mt-1 text-xs leading-5 text-slate-200 sm:text-sm">{step.text}</p>
                       </div>
                     </div>
