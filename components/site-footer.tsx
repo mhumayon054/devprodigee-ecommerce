@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { AppIcon } from "@/components/app-icon";
+import { FooterServiceLinks } from "@/components/footer-service-links";
 import { LogoMark } from "@/components/logo-mark";
-import { platforms, services, site } from "@/data/site";
+import { platforms, site } from "@/data/site";
 
 const platformAnchors: Record<string, string> = {
   Amazon: "amazon",
@@ -19,17 +20,19 @@ export function SiteFooter() {
           <div>
             <LogoMark inverse />
             <p className="mt-6 max-w-md text-sm font-normal leading-7 text-slate-300">
-              Strategy, store development, marketplace management and performance marketing for brands that want sustainable eCommerce growth.
+              We turn ambitious brands into category leaders through connected commerce systems built for measurable, sustainable growth.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3" aria-label="Supported platforms">
-              {platforms.slice(0, 5).map((platform) => (
-                <Link
-                  key={platform.name}
-                  href={`/services#platform-${platformAnchors[platform.name] ?? platform.name.toLowerCase()}`}
-                  className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:-translate-y-0.5 hover:border-blue-300/40 hover:bg-white/10 hover:text-white"
-                >
-                  {platform.name}
-                </Link>
+            <div className="mt-6 flex flex-wrap items-center gap-y-2" aria-label="Supported platforms">
+              {platforms.slice(0, 5).map((platform, index) => (
+                <span key={platform.name} className="platform-nav-item inline-flex items-center">
+                  {index > 0 ? <span className="platform-divider mx-2.5 text-blue-300/45" aria-hidden="true">|</span> : null}
+                  <Link
+                    href={`/services#platform-${platformAnchors[platform.name] ?? platform.name.toLowerCase()}`}
+                    className="text-xs font-semibold text-slate-300"
+                  >
+                    {platform.name}
+                  </Link>
+                </span>
               ))}
             </div>
           </div>
@@ -43,18 +46,12 @@ export function SiteFooter() {
 
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Core Services</h2>
-            <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              {services.slice(0, 5).map((service) => (
-                <li key={service.slug}>
-                  <Link href={`/services#${service.slug}`} className="transition hover:text-white">{service.title}</Link>
-                </li>
-              ))}
-            </ul>
+            <FooterServiceLinks />
           </div>
 
           <div>
-            <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Start a conversation</h2>
-            <p className="mt-5 text-sm leading-6 text-slate-300">Tell us where your eCommerce business is today and where you want it to go.</p>
+            <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Build What’s Next</h2>
+            <p className="mt-5 text-sm leading-6 text-slate-300">Share where your eCommerce business stands today, and we will help shape the clearest route to stronger performance.</p>
             <Link href="/contact#project-enquiry" className="mt-5 flex items-center gap-3 text-sm font-semibold text-white transition hover:text-blue-300">
               <AppIcon name="mail" size={19} /> {site.email}
             </Link>

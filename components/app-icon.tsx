@@ -21,6 +21,7 @@ const icons = {
   external: ["M14 3h7v7", "M10 14 21 3", "M21 13v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7"],
   plus: ["M12 5v14", "M5 12h14"],
   minus: ["M5 12h14"],
+  chevron: ["m6 9 6 6 6-6"],
 } as const;
 
 export type IconName = keyof typeof icons;

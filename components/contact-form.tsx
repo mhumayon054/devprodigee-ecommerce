@@ -3,14 +3,15 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { AppIcon } from "@/components/app-icon";
 import { PrimaryButton } from "@/components/primary-button";
-import { platforms, services } from "@/data/site";
+import { ServiceMultiSelect } from "@/components/service-multi-select";
+import { platforms } from "@/data/site";
 
 type FormState = {
   name: string;
   email: string;
   company: string;
   platform: string;
-  service: string;
+  services: string[];
   message: string;
   consent: boolean;
   website: string;
@@ -23,7 +24,7 @@ const initialForm: FormState = {
   email: "",
   company: "",
   platform: "",
-  service: "",
+  services: [],
   message: "",
   consent: false,
   website: "",
@@ -49,8 +50,9 @@ const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resol
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
-  const [loadingStep, setLoadingStep] = useState(0);
+  const [loadingStep, setLoadingStep] = useState(-1);
   const [statusMessage, setStatusMessage] = useState("");
+  const [serviceError, setServiceError] = useState(false);
 
   useEffect(() => {
     if (submissionState !== "submitting" && submissionState !== "success") return;
@@ -68,37 +70,54 @@ export function ContactForm() {
 
   async function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (form.services.length === 0) {
+      setServiceError(true);
+      return;
+    }
+
     setSubmissionState("submitting");
     setStatusMessage("");
-    setLoadingStep(0);
+    setLoadingStep(-1);
 
-    const progressTimer = window.setInterval(() => {
-      setLoadingStep((current) => Math.min(current + 1, loadingSteps.length - 1));
-    }, 850);
+    const progressTimers = [
+      window.setTimeout(() => setLoadingStep(0), 180),
+      window.setTimeout(() => setLoadingStep(1), 1050),
+      window.setTimeout(() => setLoadingStep(2), 1950),
+      window.setTimeout(() => setLoadingStep(3), 2850),
+    ];
 
     try {
-      const [response] = await Promise.all([
-        fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }),
-        wait(2600),
-      ]);
+      const request = fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+        .then((response) => ({ response, error: null as Error | null }))
+        .catch((error: unknown) => ({
+          response: null,
+          error: error instanceof Error ? error : new Error("The network request failed."),
+        }));
 
+      await wait(3500);
+      const requestResult = await request;
+      if (requestResult.error || !requestResult.response) throw requestResult.error;
+
+      const response = requestResult.response;
       const result = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
       if (!response.ok || !result?.ok) {
         throw new Error(result?.error || "We could not send your enquiry. Please try again.");
       }
 
-      setLoadingStep(loadingSteps.length - 1);
+      setLoadingStep(loadingSteps.length);
       setForm(initialForm);
+      setServiceError(false);
       setSubmissionState("success");
     } catch (error) {
       setSubmissionState("error");
       setStatusMessage(error instanceof Error ? error.message : "We could not send your enquiry. Please try again.");
     } finally {
-      window.clearInterval(progressTimer);
+      progressTimers.forEach((timer) => window.clearTimeout(timer));
     }
   }
 
@@ -130,13 +149,20 @@ export function ContactForm() {
           </label>
         </div>
 
-        <label className="field-label mt-5">What would you like help with?
-          <select required className="field-input" value={form.service} onChange={(event) => updateField("service", event.target.value)}>
-            <option value="" disabled>Select a service</option>
-            {services.map((service) => <option key={service.slug} value={service.title}>{service.title}</option>)}
-            <option value="Not sure yet">Not sure yet</option>
-          </select>
-        </label>
+        <div className="mt-5">
+          <label id="service-select-label" htmlFor="service-multi-select-trigger" className="field-label">What would you like help with?</label>
+          <ServiceMultiSelect
+            value={form.services}
+            invalid={serviceError}
+            onChange={(selectedServices) => {
+              updateField("services", selectedServices);
+              if (selectedServices.length > 0) setServiceError(false);
+            }}
+          />
+          {serviceError ? (
+            <p className="mt-2 text-xs font-semibold text-red-600" role="alert">Please select at least one service.</p>
+          ) : null}
+        </div>
 
         <label className="field-label mt-5">Project details
           <textarea required rows={6} maxLength={5000} className="field-input resize-none" placeholder="Tell us about your current store, goals and the support you need." value={form.message} onChange={(event) => updateField("message", event.target.value)} />
@@ -166,8 +192,8 @@ export function ContactForm() {
       </form>
 
       {overlayVisible ? (
-        <div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#17202d]/80 px-5 py-8 backdrop-blur-md" role="dialog" aria-modal="true" aria-live="polite">
-          <div className="w-full max-w-2xl rounded-[30px] border border-white/20 bg-white p-6 shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:p-9">
+        <div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-slate-950/45 px-5 py-8 backdrop-blur-[6px]" role="dialog" aria-modal="true" aria-live="polite">
+          <div className="w-full max-w-2xl rounded-[30px] border border-white/40 bg-white/95 p-6 shadow-[0_30px_100px_rgba(0,0,0,0.28)] ring-1 ring-white/60 sm:p-9">
             {submissionState === "success" ? (
               <div className="py-5 text-center">
                 <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-600">
@@ -181,20 +207,34 @@ export function ContactForm() {
             ) : (
               <div>
                 <div className="text-center">
-                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-[#166CD2]">
+                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-[#166CD2] ring-1 ring-inset ring-blue-100">
                     <span className="h-6 w-6 animate-spin rounded-full border-2 border-[#166CD2]/20 border-t-[#166CD2]" />
                   </span>
                   <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[#166CD2]">Sending project enquiry</p>
                   <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[#2B3543] sm:text-3xl">A clear process starts now</h2>
                 </div>
 
-                <div className="mt-7 space-y-3">
+                <div className="mt-7 min-h-[250px] space-y-3 sm:min-h-[276px]">
                   {loadingSteps.map((step, index) => {
-                    const active = index === loadingStep;
-                    const complete = index < loadingStep;
+                    if (index > loadingStep) return null;
+
+                    const complete = index < loadingStep || loadingStep === loadingSteps.length;
+                    const active = index === loadingStep && loadingStep < loadingSteps.length;
+
                     return (
-                      <div key={step.title} className={`flex gap-4 rounded-2xl border p-4 transition-all duration-300 sm:p-5 ${active ? "border-blue-200 bg-blue-50/70 shadow-sm" : complete ? "border-emerald-100 bg-emerald-50/50" : "border-slate-200 bg-slate-50/70 opacity-60"}`}>
-                        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xs font-bold ${complete ? "bg-emerald-500 text-white" : active ? "bg-[#166CD2] text-white" : "bg-white text-slate-400"}`}>
+                      <div
+                        key={step.title}
+                        className={`loading-step-enter flex gap-4 rounded-2xl border p-4 transition-all duration-300 sm:p-5 ${
+                          complete
+                            ? "border-emerald-100 bg-emerald-50/70"
+                            : active
+                              ? "border-blue-200 bg-blue-50/80 shadow-sm"
+                              : "border-slate-200 bg-slate-50/70"
+                        }`}
+                      >
+                        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xs font-bold transition-all duration-300 ${
+                          complete ? "loading-check-pop bg-emerald-500 text-white" : "bg-[#166CD2] text-white"
+                        }`}>
                           {complete ? <AppIcon name="check" size={18} /> : `0${index + 1}`}
                         </span>
                         <div>

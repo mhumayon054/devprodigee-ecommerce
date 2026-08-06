@@ -9,6 +9,18 @@ function cleanText(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
+function cleanTextList(value: unknown, maxItems: number, maxLength: number) {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => cleanText(item, maxLength))
+      .filter(Boolean)
+      .slice(0, maxItems);
+  }
+
+  const singleValue = cleanText(value, maxLength);
+  return singleValue ? [singleValue] : [];
+}
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -31,7 +43,8 @@ export async function POST(request: Request) {
     const email = cleanText(body.email, 180).toLowerCase();
     const company = cleanText(body.company, 150);
     const platform = cleanText(body.platform, 100);
-    const service = cleanText(body.service, 150);
+    const selectedServices = cleanTextList(body.services ?? body.service, 8, 150);
+    const service = selectedServices.join(", ");
     const message = cleanText(body.message, 5000);
     const consent = body.consent === true;
 
@@ -77,7 +90,7 @@ export async function POST(request: Request) {
       `Email: ${email}`,
       `Company: ${company || "Not provided"}`,
       `Primary platform: ${platform || "Not selected"}`,
-      `Service: ${service}`,
+      `Services: ${service}`,
       "",
       "Project details:",
       message,
@@ -96,7 +109,7 @@ export async function POST(request: Request) {
               <tr><td style="padding:8px 0;color:#718096">Work email</td><td style="padding:8px 0;font-weight:700"><a href="mailto:${safe.email}" style="color:#166cd2">${safe.email}</a></td></tr>
               <tr><td style="padding:8px 0;color:#718096">Company</td><td style="padding:8px 0;font-weight:700">${safe.company}</td></tr>
               <tr><td style="padding:8px 0;color:#718096">Primary platform</td><td style="padding:8px 0;font-weight:700">${safe.platform}</td></tr>
-              <tr><td style="padding:8px 0;color:#718096">Requested service</td><td style="padding:8px 0;font-weight:700">${safe.service}</td></tr>
+              <tr><td style="padding:8px 0;color:#718096">Requested services</td><td style="padding:8px 0;font-weight:700">${safe.service}</td></tr>
             </table>
             <div style="margin-top:22px;border-top:1px solid #e7edf4;padding-top:22px">
               <div style="font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#718096;font-weight:700">Project details</div>
