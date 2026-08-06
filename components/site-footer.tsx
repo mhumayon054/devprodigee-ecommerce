@@ -15,7 +15,7 @@ const platformAnchors: Record<string, string> = {
 export function SiteFooter() {
   return (
     <footer className="bg-[#202936] text-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 pt-16 pb-7 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.35fr_.75fr_.9fr_.9fr]">
           <div>
             <LogoMark inverse />
