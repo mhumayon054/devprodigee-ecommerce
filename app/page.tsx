@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { AppIcon } from "@/components/app-icon";
 import { CaseStudyCard } from "@/components/case-study-card";
 import { FaqList } from "@/components/faq-list";
@@ -55,8 +55,8 @@ export default function HomePage() {
             <div className="dashboard-shell relative rounded-[30px] border border-white/80 bg-white/95 p-4 shadow-[0_30px_90px_rgba(43,53,67,0.22)] sm:p-5">
               <div className="relative flex items-center justify-between border-b border-slate-100 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white p-1.5 shadow-sm ring-1 ring-slate-100">
-                    <Image src="/logo-devprodigee-mark.png" alt="" width={512} height={512} className="h-full w-full object-contain" />
+                  <span className="grid h-10 w-10 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-white p-1.5">
+                    <Image src="/logo-devprodigee-icon.png" alt="" width={208} height={305} className="h-full w-full object-contain" />
                   </span>
                   <div>
                     <p className="text-sm font-bold text-[#2B3543]">Commerce Growth Hub</p>
