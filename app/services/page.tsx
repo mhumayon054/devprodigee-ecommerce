@@ -1,92 +1,124 @@
 import type { Metadata } from "next";
 import { AppIcon, type IconName } from "@/components/app-icon";
-import { PageHero } from "@/components/page-hero";
-import { PlatformFaqs } from "@/components/platform-faqs";
 import { PlatformStrip } from "@/components/platform-strip";
 import { PrimaryButton } from "@/components/primary-button";
-import { SectionHeading } from "@/components/section-heading";
-import { platformFaqGroups, platformServices, processSteps, services } from "@/data/site";
+import { services } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "eCommerce Services",
-  description: "Explore marketplace management, store development, listing optimisation, PPC, creative and analytics services across major eCommerce platforms.",
+  description:
+    "Marketplace management, store development, listing optimisation, paid advertising, creative and reporting for growing eCommerce brands.",
 };
+
+const engagementSteps = [
+  {
+    number: "01",
+    title: "Audit what matters",
+    text: "We review the store, catalogue, ads and marketplace operations relevant to the scope — not a generic checklist.",
+  },
+  {
+    number: "02",
+    title: "Fix and execute",
+    text: "The highest-impact work is prioritised first, with clear ownership and practical delivery across the selected channels.",
+  },
+  {
+    number: "03",
+    title: "Measure and improve",
+    text: "Reporting stays focused on commercial KPIs, what changed and the next action to take.",
+  },
+];
 
 export default function ServicesPage() {
   return (
     <div>
-      <PageHero
-        eyebrow="Services"
-        title="Connected eCommerce services built around measurable growth"
-        description="From marketplace account management and listing optimisation to storefront development, advertising, creative and analytics, we connect every discipline through one commercial plan."
-        actions={
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <PrimaryButton href="/contact" variant="white" arrow>Discuss your requirements</PrimaryButton>
-            <PrimaryButton href="/portfolio" variant="ghost-white">View case studies</PrimaryButton>
-          </div>
-        }
-      />
-
-      <section className="section-space">
-        <div className="container-shell">
-          <SectionHeading eyebrow="Core capabilities" title="Specialist support from strategy through daily execution" description="Choose a focused service or combine capabilities into an ongoing plan tailored to your platforms, catalogue, team and growth stage." align="center" />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service, index) => (
-              <article id={service.slug} key={service.slug} className="scroll-mt-32 group rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_12px_40px_rgba(43,53,67,0.06)] transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_20px_55px_rgba(22,108,210,0.12)]">
-                <div className="flex items-start justify-between gap-5">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#166CD2]/10 text-[#166CD2] transition group-hover:bg-[#166CD2] group-hover:text-white"><AppIcon name={service.icon as IconName} size={24} /></span>
-                  <span className="text-sm font-bold text-slate-200">0{index + 1}</span>
-                </div>
-                <h2 className="mt-6 text-2xl font-bold text-[#2B3543]">{service.title}</h2>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{service.description}</p>
-                <ul className="mt-6 space-y-3">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm font-semibold text-slate-600">
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-50 text-[#166CD2]"><AppIcon name="check" size={13} /></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-slate-50">
-        <div className="container-shell">
-          <SectionHeading eyebrow="Platform expertise" title="The right service mix for each marketplace and storefront" description="Every platform has different search logic, compliance requirements, customer behaviour and advertising tools. Our work is adapted accordingly." align="center" />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {platformServices.map((item) => (
-              <article id={`platform-${item.platform.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`} key={item.platform} className="scroll-mt-32 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-2xl font-bold text-[#2B3543]">{item.platform}</h2>
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#166CD2]"><AppIcon name="store" size={20} /></span>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{item.summary}</p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {item.items.map((service) => <span key={service} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600">{service}</span>)}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-[#2B3543] text-white">
-        <div className="container-shell">
-          <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-center">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-300">Delivery framework</p>
-              <h2 className="mt-4 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-4xl">A structured process that keeps strategy and execution connected</h2>
-              <p className="mt-5 text-base leading-8 text-slate-300">Every engagement has a clear route from discovery through implementation, reporting and continuous improvement.</p>
+      <section className="relative overflow-hidden bg-[#2B3543] pb-12 pt-32 text-white sm:pb-14 sm:pt-36 lg:pt-40">
+        <div className="absolute -left-28 top-12 h-64 w-64 rounded-full bg-[#166CD2]/30 blur-3xl" />
+        <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="surface-grid absolute inset-0 opacity-25" />
+        <div className="container-shell relative">
+          <div className="max-w-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-300">Services</p>
+            <h1 className="mt-4 text-4xl font-bold leading-[1.06] tracking-[-0.04em] sm:text-5xl lg:text-[56px]">
+              The eCommerce work that actually moves the business forward.
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">
+              Six focused capabilities covering marketplaces, storefronts, listings, paid growth, creative and reporting. Use one service or combine them into one working plan.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <PrimaryButton href="#core-services" variant="white" arrow>View services</PrimaryButton>
+              <PrimaryButton href="/contact" variant="ghost-white">Discuss your requirements</PrimaryButton>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {processSteps.map((step) => (
-                <article key={step.number} className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
-                  <span className="text-xs font-bold text-blue-300">{step.number}</span>
-                  <h3 className="mt-3 text-lg font-bold">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-300">{step.text}</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="core-services" className="scroll-mt-24 py-12 sm:py-16 lg:py-20">
+        <div className="container-shell">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#166CD2]">Core services</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-[-0.03em] text-[#2B3543] sm:text-4xl">
+              What we do
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+              Clear scope, specialist execution and no filler. Every service is tied to a real operating or growth need.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:mt-10 lg:gap-5">
+            {services.map((service, index) => (
+              <article
+                id={service.slug}
+                key={service.slug}
+                className="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_10px_32px_rgba(43,53,67,0.05)] sm:p-6"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#166CD2]/10 text-[#166CD2]">
+                    <AppIcon name={service.icon as IconName} size={22} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <h2 className="text-xl font-bold leading-tight text-[#2B3543]">{service.title}</h2>
+                      <span className="shrink-0 text-xs font-bold text-slate-300">0{index + 1}</span>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">{service.description}</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-100 pt-4">
+                  {service.features.map((feature) => (
+                    <span
+                      key={feature}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600"
+                    >
+                      <AppIcon name="check" size={12} />
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-slate-200 bg-slate-50 py-12 sm:py-14">
+        <div className="container-shell">
+          <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+            <div className="max-w-xl">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#166CD2]">How we work</p>
+              <h2 className="mt-3 text-3xl font-bold tracking-[-0.03em] text-[#2B3543]">
+                A simple operating rhythm.
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+                Enough structure to keep the work accountable without turning the page — or the project — into a process document.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {engagementSteps.map((step) => (
+                <article key={step.number} className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <span className="text-xs font-bold text-[#166CD2]">{step.number}</span>
+                  <h3 className="mt-2 text-base font-bold text-[#2B3543]">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{step.text}</p>
                 </article>
               ))}
             </div>
@@ -94,26 +126,23 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="section-space">
+      <section id="platforms" className="scroll-mt-24 py-10 sm:py-12">
         <div className="container-shell">
-          <PlatformStrip label="Marketplace and storefront expertise across a connected commerce ecosystem" />
+          <PlatformStrip label="Platforms we work across" />
         </div>
       </section>
 
-      <section className="section-space bg-slate-50">
-        <div className="container-shell">
-          <SectionHeading eyebrow="Platform FAQs" title="Detailed answers for each commerce channel" description="Select a platform to review common questions about setup, optimisation, advertising, operations and support." align="center" />
-          <div className="mx-auto mt-12 max-w-4xl"><PlatformFaqs groups={platformFaqGroups} /></div>
-        </div>
-      </section>
-
-      <section className="px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-[32px] bg-[#166CD2] px-6 py-12 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:px-14 lg:py-14">
+      <section className="px-5 pb-14 pt-3 sm:px-6 sm:pb-16 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[28px] bg-[#166CD2] px-6 py-9 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:px-12 lg:py-10">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-100">Tailored scope</p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-4xl">Build a service plan around your current platform, team and growth priorities.</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-100">Need a specific scope?</p>
+            <h2 className="mt-3 text-2xl font-bold leading-tight tracking-[-0.03em] sm:text-3xl">
+              Tell us the platform, the problem and the target. We&apos;ll keep the plan focused.
+            </h2>
           </div>
-          <div className="mt-7 shrink-0 lg:mt-0"><PrimaryButton href="/contact" variant="white" arrow>Request a consultation</PrimaryButton></div>
+          <div className="mt-6 shrink-0 lg:mt-0">
+            <PrimaryButton href="/contact" variant="white" arrow>Start a conversation</PrimaryButton>
+          </div>
         </div>
       </section>
     </div>

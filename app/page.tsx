@@ -32,7 +32,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <PrimaryButton href="/contact" arrow>Book a free strategy call</PrimaryButton>
-              <PrimaryButton href="/services" variant="outline">Explore our services</PrimaryButton>
+              <PrimaryButton href="/services#core-services" variant="outline">Explore our services</PrimaryButton>
             </div>
             <div className="mt-9 grid max-w-2xl grid-cols-3 gap-4 border-t border-slate-300/80 pt-6">
               {[
@@ -125,7 +125,7 @@ export default function HomePage() {
         <div className="container-shell">
           <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading eyebrow="What we do" title="Everything you need to build a stronger eCommerce business" description="One coordinated agency for marketplace operations, storefront development, organic visibility, paid growth, creative and performance reporting." />
-            <PrimaryButton href="/services" variant="outline" arrow>View all services</PrimaryButton>
+            <PrimaryButton href="/services#core-services" variant="outline" arrow>View all services</PrimaryButton>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => <ServiceCard key={service.slug} service={service} />)}

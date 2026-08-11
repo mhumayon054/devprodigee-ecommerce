@@ -4,14 +4,6 @@ import { FooterServiceLinks } from "@/components/footer-service-links";
 import { LogoMark } from "@/components/logo-mark";
 import { platforms, site } from "@/data/site";
 
-const platformAnchors: Record<string, string> = {
-  Amazon: "amazon",
-  Walmart: "walmart-marketplace",
-  Shopify: "shopify",
-  eBay: "ebay",
-  Etsy: "etsy",
-};
-
 export function SiteFooter() {
   return (
     <footer className="bg-[#202936] text-white">
@@ -27,7 +19,7 @@ export function SiteFooter() {
                 <span key={platform.name} className="platform-nav-item inline-flex items-center">
                   {index > 0 ? <span className="platform-divider mx-2.5 text-blue-300/45" aria-hidden="true">|</span> : null}
                   <Link
-                    href={`/services#platform-${platformAnchors[platform.name] ?? platform.name.toLowerCase()}`}
+                    href="/services#platforms"
                     className="platform-footer-link text-xs font-semibold text-slate-300"
                   >
                     {platform.name}

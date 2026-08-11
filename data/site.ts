@@ -14,13 +14,13 @@ export const site = {
 }
 
 export const platforms = [
-  { name: 'Amazon', code: 'A', tone: 'orange' },
-  { name: 'Walmart', code: 'W', tone: 'blue' },
-  { name: 'Shopify', code: 'S', tone: 'green' },
-  { name: 'eBay', code: 'e', tone: 'multi' },
-  { name: 'Etsy', code: 'E', tone: 'amber' },
-  { name: 'TikTok Shop', code: 'T', tone: 'dark' },
-  { name: 'WooCommerce', code: 'Woo', tone: 'purple' },
+  { name: 'Amazon', logo: '/platforms/amazon.svg', code: 'A', tone: 'orange' },
+  { name: 'Walmart', logo: '/platforms/walmart.svg', code: 'W', tone: 'blue' },
+  { name: 'Shopify', logo: '/platforms/shopify.svg', code: 'S', tone: 'green' },
+  { name: 'eBay', logo: '/platforms/ebay.svg', code: 'e', tone: 'multi' },
+  { name: 'Etsy', logo: '/platforms/etsy.svg', code: 'E', tone: 'amber' },
+  { name: 'TikTok Shop', logo: '/platforms/tiktok.svg', code: 'T', tone: 'dark', qualifier: 'Shop' },
+  { name: 'WooCommerce', logo: '/platforms/woocommerce.svg', code: 'Woo', tone: 'purple' },
 ]
 
 export const services = [
@@ -29,7 +29,7 @@ export const services = [
     icon: 'store',
     title: 'Marketplace Management',
     description:
-      'End-to-end account management across Amazon, Walmart, eBay, Etsy and TikTok Shop, from setup and catalogue control to daily operations.',
+      'Day-to-day marketplace control across Amazon, Walmart, eBay, Etsy and TikTok Shop — catalogue, account health, inventory and orders.',
     features: ['Account setup and health', 'Inventory and order workflows', 'Performance monitoring'],
   },
   {
@@ -37,7 +37,7 @@ export const services = [
     icon: 'code',
     title: 'Store Development',
     description:
-      'Responsive, conversion-focused Shopify and WooCommerce stores built around your brand, customer journey and commercial goals.',
+      'Shopify and WooCommerce builds or redesigns focused on mobile UX, speed, checkout flow and conversion.',
     features: ['Custom storefront design', 'App and payment integrations', 'Speed and UX optimisation'],
   },
   {
@@ -45,7 +45,7 @@ export const services = [
     icon: 'search',
     title: 'Listing Optimisation & SEO',
     description:
-      'Keyword research, titles, descriptions, item specifics and category optimisation designed to improve visibility and conversion.',
+      'Search-led titles, attributes and product copy built around how buyers actually find and compare products.',
     features: ['Marketplace keyword research', 'SEO-led product copy', 'Continuous listing refinement'],
   },
   {
@@ -53,7 +53,7 @@ export const services = [
     icon: 'target',
     title: 'PPC & Performance Advertising',
     description:
-      'Structured advertising campaigns across marketplaces and paid channels, continuously optimised using performance data.',
+      'Campaign setup, budgets and ongoing optimisation with spend tied to agreed commercial KPIs.',
     features: ['Campaign setup and structure', 'Bid and budget optimisation', 'Actionable reporting'],
   },
   {
@@ -61,7 +61,7 @@ export const services = [
     icon: 'palette',
     title: 'Creative Design & Branding',
     description:
-      'Storefront graphics, product images, A+ Content and brand assets that communicate value clearly and build buyer confidence.',
+      'Storefront graphics, product imagery and marketplace content built to explain the product quickly and clearly.',
     features: ['Marketplace creative', 'Amazon A+ Content', 'Brand-consistent visual systems'],
   },
   {
@@ -69,7 +69,7 @@ export const services = [
     icon: 'chart',
     title: 'Analytics & Reporting',
     description:
-      'Clear dashboards and monthly insights that turn marketplace data into practical decisions for growth, efficiency and profitability.',
+      'Lean reporting that shows which KPIs changed, why they changed and what action should come next.',
     features: ['KPI tracking', 'Growth opportunity analysis', 'Transparent monthly reporting'],
   },
 ]
