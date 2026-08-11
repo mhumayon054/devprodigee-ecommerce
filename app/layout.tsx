@@ -11,7 +11,7 @@ const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://devprodigee.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://devprodigee-ecommerce.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -84,7 +84,7 @@ export async function POST(request: Request) {
 
     const subject = `New website enquiry from ${name}${company ? ` — ${company}` : ""}`;
     const text = [
-      "A new project enquiry was submitted on DevProdigee.com.",
+      "A new project enquiry was submitted on the DevProdigee eCommerce website.",
       "",
       `Name: ${name}`,
       `Email: ${email}`,

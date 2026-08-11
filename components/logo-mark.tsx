@@ -11,7 +11,7 @@ export function LogoMark({ inverse = false }: Props) {
       aria-label="DevProdigee eCommerce home"
     >
       <Image
-        src="/logo-devprodigee.png"
+        src="/logo.webp"
         alt="DevProdigee — eCommerce Solutions"
         width={1216}
         height={313}
