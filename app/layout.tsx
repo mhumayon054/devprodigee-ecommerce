@@ -20,7 +20,14 @@ export const metadata: Metadata = {
     template: "%s | DevProdigee eCommerce",
   },
   description: "End-to-end marketplace management, eCommerce development, listing optimisation, advertising and growth support across Amazon, Walmart, Shopify, TikTok Shop, Etsy, eBay and WooCommerce.",
-  icons: { icon: "/favicon.svg" },
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "DevProdigee eCommerce",
     description: "Marketplace strategy, store development and performance growth for ambitious eCommerce brands.",
