@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { AppIcon, type IconName } from "@/components/app-icon";
+import { FaqList } from "@/components/faq-list";
 import { PlatformStrip } from "@/components/platform-strip";
 import { PrimaryButton } from "@/components/primary-button";
-import { services } from "@/data/site";
+import { SectionHeading } from "@/components/section-heading";
+import { faqs, services } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "eCommerce Services",
@@ -129,6 +131,17 @@ export default function ServicesPage() {
       <section id="platforms" className="scroll-mt-24 py-10 sm:py-12">
         <div className="container-shell">
           <PlatformStrip label="Platforms we work across" />
+        </div>
+      </section>
+
+      <section className="border-y border-slate-200 bg-slate-50 py-12 sm:py-14 lg:py-16">
+        <div className="container-shell grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
+          <SectionHeading
+            eyebrow="Frequently asked"
+            title="Practical answers before we start"
+            description="Platform coverage, engagement scope, pricing and ownership — kept here so the homepage stays focused on services and proof."
+          />
+          <FaqList items={faqs} />
         </div>
       </section>
 

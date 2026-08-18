@@ -16,8 +16,8 @@ export function LogoMark({ inverse = false }: Props) {
         width={1216}
         height={313}
         priority={!inverse}
-        className="h-auto w-[205px] sm:w-[230px] lg:w-[250px]"
-        sizes="(max-width: 639px) 205px, (max-width: 1023px) 230px, 250px"
+        className="h-auto w-[180px] sm:w-[205px] lg:w-[220px]"
+        sizes="(max-width: 639px) 180px, (max-width: 1023px) 205px, 220px"
       />
     </Link>
   );

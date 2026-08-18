@@ -263,3 +263,9 @@ body { margin: 0; background: #fff; color: var(--brand-dark); }
   .enquiry-success-check { stroke-dashoffset: 0; }
   .enquiry-success-copy { opacity: 1; }
 }
+
+.home-proof-row {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.home-proof-row::-webkit-scrollbar { display: none; }
