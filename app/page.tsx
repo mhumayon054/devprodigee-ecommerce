@@ -5,6 +5,7 @@ import { AppIcon, type IconName } from "@/components/app-icon";
 import { CaseStudyCard } from "@/components/case-study-card";
 import { PlatformStrip } from "@/components/platform-strip";
 import { PrimaryButton } from "@/components/primary-button";
+import { RotatingHeroHeadline } from "@/components/rotating-hero-headline";
 import { SectionHeading } from "@/components/section-heading";
 import { caseStudies, services } from "@/data/site";
 
@@ -22,98 +23,63 @@ const homeBenefits = [
 export default function HomePage() {
   return (
     <div>
-      <section className="relative overflow-hidden bg-slate-100 pb-7 pt-24 sm:pb-8 sm:pt-28 lg:pb-9 lg:pt-28">
-        <div className="hero-backdrop absolute inset-0" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-white/75 to-transparent" />
+      <section className="relative overflow-hidden border-b border-slate-200/70 bg-[#eef5fb] pb-7 pt-24 sm:pb-8 sm:pt-28 lg:pb-9 lg:pt-28">
+        <video className="absolute inset-0 h-full w-full object-cover object-center opacity-70" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+          <source src="/tech-network.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-video-overlay absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-white/80 to-transparent" />
 
         <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid items-center gap-6 lg:grid-cols-[1.08fr_.92fr] lg:gap-9">
             <div className="max-w-3xl">
-              <p className="inline-flex items-center gap-2 rounded-full border border-[#166CD2]/15 bg-white/90 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#166CD2] shadow-sm sm:text-xs">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/[0.55] px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#166CD2] shadow-sm backdrop-blur-sm sm:text-xs">
                 <AppIcon name="spark" size={15} /> Marketplace + storefront growth
               </p>
-              <h1 className="mt-4 text-[34px] font-bold leading-[1.04] tracking-[-0.045em] text-[#2B3543] sm:text-[44px] lg:text-[50px]">
-                Grow your eCommerce business across the channels your customers already use.
-              </h1>
-              <p className="mt-4 max-w-2xl text-[14px] leading-6 text-slate-600 sm:text-base sm:leading-7 lg:text-[17px]">
-                We manage marketplaces, build and improve stores, optimise listings, run paid growth and turn performance data into clear next actions.
+              <RotatingHeroHeadline />
+              <p className="mt-4 max-w-2xl text-[14px] font-medium leading-6 text-slate-600 sm:text-base sm:leading-7 lg:text-[17px]">
+                One specialist team helping your brand grow across stores, marketplaces and paid channels.
               </p>
               <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
-                <PrimaryButton href="/contact" arrow className="px-5 py-3">Book a free strategy call</PrimaryButton>
-                <PrimaryButton href="/services#core-services" variant="outline" className="px-5 py-3">See exactly what we do</PrimaryButton>
+                <PrimaryButton href="/contact" arrow className="px-5 py-3">Book a free call</PrimaryButton>
+                <PrimaryButton href="/services#core-services" variant="outline" className="border-white/80 bg-white/[0.45] px-5 py-3 backdrop-blur-sm">See exactly what we do</PrimaryButton>
               </div>
             </div>
 
             <div className="relative hidden lg:block">
-              <div className="absolute -left-8 top-1/4 h-36 w-36 rounded-full bg-[#166CD2]/20 blur-3xl" />
-              <div className="absolute -right-8 bottom-8 h-40 w-40 rounded-full bg-cyan-300/30 blur-3xl" />
-              <div className="dashboard-shell relative rounded-[28px] border border-white/80 bg-white/95 p-4 shadow-[0_26px_75px_rgba(43,53,67,0.18)]">
-                <div className="relative flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="absolute -left-8 top-1/4 h-36 w-36 rounded-full bg-[#166CD2]/15 blur-3xl" />
+              <div className="absolute -right-8 bottom-8 h-40 w-40 rounded-full bg-cyan-300/20 blur-3xl" />
+              <div className="dashboard-shell dashboard-shell-soft relative rounded-[28px] border border-white/70 bg-white/[0.52] p-4 shadow-[0_20px_55px_rgba(43,53,67,0.12)] backdrop-blur-[5px]">
+                <div className="relative flex items-center justify-between border-b border-white/[0.65] pb-3">
                   <div className="flex items-center gap-3">
-                    <span className="grid h-9 w-9 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-white p-1.5">
-                      <Image src="/logo-devprodigee-icon.png" alt="" width={208} height={305} className="h-full w-full object-contain" />
+                    <span className="grid h-9 w-9 place-items-center overflow-hidden rounded-xl border border-white/70 bg-white/[0.55] p-1.5">
+                      <Image src="/icon.webp" alt="" width={242} height={416} className="h-full w-full object-contain" />
                     </span>
-                    <div>
-                      <p className="text-sm font-bold text-[#2B3543]">Commerce Growth Hub</p>
-                      <p className="text-[11px] font-semibold text-slate-400">Multi-channel overview</p>
-                    </div>
+                    <div><p className="text-sm font-bold text-[#2B3543]">Commerce Growth Hub</p><p className="text-[11px] font-semibold text-slate-500/75">Multi-channel overview</p></div>
                   </div>
-                  <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700">Conversion focused</span>
+                  <span className="rounded-full bg-emerald-50/70 px-3 py-1.5 text-[10px] font-bold text-emerald-700">Conversion focused</span>
                 </div>
 
                 <div className="relative mt-3 grid grid-cols-3 gap-2.5">
-                  <div className="rounded-2xl bg-[#2B3543] p-3 text-white">
-                    <span className="text-[10px] font-semibold text-slate-300">Marketplace reach</span>
-                    <strong className="mt-1.5 block text-lg font-bold">7 channels</strong>
-                    <div className="mt-3 flex h-10 items-end gap-1">
-                      {[22, 31, 25, 39, 34, 48, 57].map((height) => <span key={height} className="w-full rounded-t bg-blue-400/80" style={{ height: `${Math.round(height * 0.72)}px` }} />)}
-                    </div>
+                  <div className="rounded-2xl bg-[#2B3543]/90 p-3 text-white backdrop-blur-sm">
+                    <span className="text-[10px] font-semibold text-slate-300">Marketplace reach</span><strong className="mt-1.5 block text-lg font-bold">7 channels</strong>
+                    <div className="mt-3 flex h-10 items-end gap-1">{[22,31,25,39,34,48,57].map((height) => <span key={height} className="w-full rounded-t bg-blue-400/80" style={{ height: `${Math.round(height * 0.72)}px` }} />)}</div>
                   </div>
-                  <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-                    <span className="text-[10px] font-semibold text-slate-400">Execution</span>
-                    <strong className="mt-1.5 block text-lg font-bold text-[#2B3543]">One team</strong>
-                    <div className="mt-3 grid h-10 place-items-center rounded-xl bg-blue-50 text-[#166CD2]"><AppIcon name="people" size={26} /></div>
-                  </div>
-                  <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-                    <span className="text-[10px] font-semibold text-slate-400">Reporting</span>
-                    <strong className="mt-1.5 block text-lg font-bold text-[#2B3543]">Clear KPIs</strong>
-                    <div className="mt-3 grid h-10 place-items-center rounded-xl bg-emerald-50 text-emerald-600"><AppIcon name="target" size={26} /></div>
-                  </div>
+                  <div className="rounded-2xl border border-white/60 bg-white/[0.42] p-3 backdrop-blur-sm"><span className="text-[10px] font-semibold text-slate-500/70">Execution</span><strong className="mt-1.5 block text-lg font-bold text-[#2B3543]">One team</strong><div className="mt-3 grid h-10 place-items-center rounded-xl bg-blue-50/[0.65] text-[#166CD2]"><AppIcon name="people" size={26} /></div></div>
+                  <div className="rounded-2xl border border-white/60 bg-white/[0.42] p-3 backdrop-blur-sm"><span className="text-[10px] font-semibold text-slate-500/70">Reporting</span><strong className="mt-1.5 block text-lg font-bold text-[#2B3543]">Clear KPIs</strong><div className="mt-3 grid h-10 place-items-center rounded-xl bg-emerald-50/[0.65] text-emerald-600"><AppIcon name="target" size={26} /></div></div>
                 </div>
 
-                <div className="relative mt-3 rounded-2xl border border-slate-100 bg-white p-3.5 shadow-sm">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-bold text-[#2B3543]">Performance momentum</p>
-                      <p className="mt-1 text-[10px] font-semibold text-slate-400">Listings, advertising and storefront improvements</p>
-                    </div>
-                    <span className="rounded-lg bg-blue-50 px-2 py-1 text-[10px] font-bold text-[#166CD2]">Optimising</span>
-                  </div>
-                  <svg viewBox="0 0 400 95" className="mt-1.5 h-[78px] w-full" preserveAspectRatio="none" aria-label="Growth chart illustration">
-                    <defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#166CD2" stopOpacity=".28"/><stop offset="1" stopColor="#166CD2" stopOpacity="0"/></linearGradient></defs>
-                    <path d="M0 78 C45 74 62 61 92 66 S143 62 169 48 S218 55 247 37 S302 43 331 24 S370 22 400 10 V95 H0Z" fill="url(#chartFill)"/>
-                    <path d="M0 78 C45 74 62 61 92 66 S143 62 169 48 S218 55 247 37 S302 43 331 24 S370 22 400 10" fill="none" stroke="#166CD2" strokeWidth="4" strokeLinecap="round"/>
-                  </svg>
+                <div className="relative mt-3 rounded-2xl border border-white/[0.65] bg-white/[0.42] p-3.5 shadow-sm backdrop-blur-sm">
+                  <div className="flex items-center justify-between"><div><p className="text-xs font-bold text-[#2B3543]">Performance momentum</p><p className="mt-1 text-[10px] font-semibold text-slate-500/70">Listings, advertising and storefront improvements</p></div><span className="rounded-lg bg-blue-50/70 px-2 py-1 text-[10px] font-bold text-[#166CD2]">Optimising</span></div>
+                  <svg viewBox="0 0 400 95" className="mt-1.5 h-[78px] w-full" preserveAspectRatio="none" aria-label="Growth chart illustration"><defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#166CD2" stopOpacity=".28"/><stop offset="1" stopColor="#166CD2" stopOpacity="0"/></linearGradient></defs><path d="M0 78 C45 74 62 61 92 66 S143 62 169 48 S218 55 247 37 S302 43 331 24 S370 22 400 10 V95 H0Z" fill="url(#chartFill)"/><path d="M0 78 C45 74 62 61 92 66 S143 62 169 48 S218 55 247 37 S302 43 331 24 S370 22 400 10" fill="none" stroke="#166CD2" strokeWidth="4" strokeLinecap="round"/></svg>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-4 sm:mt-5 lg:mt-5">
-            <PlatformStrip variant="compact" label="Platforms we manage & grow" />
-          </div>
-
-          <div className="mt-4 grid max-w-2xl grid-cols-3 gap-3 border-t border-slate-300/80 pt-4 lg:mt-3 lg:pt-3">
-            {[
-              ["7+", "commerce platforms"],
-              ["360°", "growth support"],
-              ["100%", "asset ownership"],
-            ].map(([value, label]) => (
-              <div key={label}>
-                <strong className="block text-lg font-bold text-[#2B3543] sm:text-xl">{value}</strong>
-                <span className="mt-0.5 block text-[9px] font-semibold leading-4 text-slate-500 sm:text-[11px] sm:leading-4">{label}</span>
-              </div>
-            ))}
+          <div className="mt-4 sm:mt-5 lg:mt-5"><PlatformStrip variant="compact" label="Platforms we manage & grow" /></div>
+          <div className="mt-4 grid max-w-2xl grid-cols-3 gap-3 border-t border-slate-400/[0.35] pt-4 lg:mt-3 lg:pt-3">
+            {[["7+","commerce platforms"],["360°","growth support"],["100%","asset ownership"]].map(([value,label]) => <div key={label}><strong className="block text-lg font-bold text-[#2B3543] sm:text-xl">{value}</strong><span className="mt-0.5 block text-[9px] font-semibold leading-4 text-slate-500 sm:text-[11px] sm:leading-4">{label}</span></div>)}
           </div>
         </div>
       </section>

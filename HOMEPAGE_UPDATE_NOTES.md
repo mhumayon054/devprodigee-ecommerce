@@ -1,18 +1,19 @@
-# Homepage UX / Conversion Update
+# Homepage Update — 21 Aug 2026
 
-This build is designed to be extracted over the existing project directory.
+This package is intended to be extracted into the existing project root with overwrite enabled.
 
-## What changed
-- Shorter, conversion-focused homepage with less document-style content.
-- Platform logos moved into the hero area so Amazon, Walmart, Shopify, eBay, Etsy, TikTok Shop and WooCommerce are visible much earlier on desktop and mobile.
-- Homepage service presentation changed to compact, scannable service tiles.
-- Large homepage About/Process/FAQ blocks removed to reduce scrolling.
-- FAQ section moved to the Services page.
-- Homepage case studies made more compact; on mobile they use a horizontal swipe row instead of a long vertical stack.
-- Case-study proof screenshots now use a consistent branded media frame with the complete source image preserved instead of aggressive object-cover cropping.
-- Case-study image treatment applies anywhere the shared CaseStudyCard component is used, including Portfolio cards.
-- Final homepage CTA consolidated with three concise trust points.
-- Mobile spacing and section heights reduced substantially.
+## Implemented
+- Header logo switched to the original DevProdigee logo asset available in the supplied project and prepared with a transparent background.
+- Removed `Contact Us` from the desktop/mobile header navigation only; the contact page itself remains available.
+- Replaced the long hero headline with a smooth rotating headline using one phrase from each requested category: `Grow Your Brand`, `Increase Conversions`, `Sell Everywhere`, `Strategy That Scales`.
+- Updated the hero supporting punch line with a concise temporary professional line so it can be replaced when Uzair supplies the final copy.
+- Kept the Commerce Growth Hub on Home as requested in the final instruction and made the panel/cards more transparent so the background remains visible.
+- Converted the seven platform logos into a thin continuous right-to-left marquee banner with a low-opacity background.
+- Added a lightweight local technology-network MP4 hero background (`public/tech-network.mp4`) so there is no external video/CDN dependency.
+- Header container is translucent with a visible outline; it smoothly hides while scrolling down and returns while scrolling up.
+- Reduced the desktop header CTA size.
+- Matched both top CTAs to the shorter label `Book a free call`.
+- Fixed the Home dashboard icon reference to use the existing `public/icon.webp` asset.
 
-## Safe overwrite note
-`.env.local`, `node_modules` and `.next` are intentionally not included. Extract this ZIP into the existing project root and allow file overwrite; your local environment file will remain untouched.
+## Apply
+Extract this ZIP into your project root, allow overwrite, then run `npm install` (if dependencies are not already installed) and `npm run build`.
