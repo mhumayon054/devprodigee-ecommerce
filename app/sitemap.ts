@@ -1,21 +1,18 @@
 import type { MetadataRoute } from "next";
+import { seoServicePages } from "@/data/seo-services";
 import { caseStudies } from "@/data/site";
+import { absoluteUrl } from "@/lib/seo";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://devprodigee-ecommerce.com";
+const lastModified = new Date("2026-08-24T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    "",
-    "/services",
-    "/portfolio",
-    ...caseStudies.map((study) => `/portfolio/${study.id}`),
-    "/about",
-    "/contact",
+  return [
+    { url: absoluteUrl("/"), lastModified, changeFrequency: "weekly", priority: 1 },
+    { url: absoluteUrl("/services"), lastModified, changeFrequency: "monthly", priority: 0.95 },
+    ...seoServicePages.map((service) => ({ url: absoluteUrl(`/services/${service.slug}`), lastModified, changeFrequency: "monthly" as const, priority: 0.85 })),
+    { url: absoluteUrl("/portfolio"), lastModified, changeFrequency: "monthly", priority: 0.9 },
+    ...caseStudies.map((study) => ({ url: absoluteUrl(`/portfolio/${study.id}`), lastModified, changeFrequency: "monthly" as const, priority: 0.8 })),
+    { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/contact"), lastModified, changeFrequency: "monthly", priority: 0.75 },
   ];
-  return routes.map((route) => ({
-    url: `${siteUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/contact" ? 0.8 : 0.9,
-  }));
 }

@@ -3,11 +3,23 @@ import Image from "next/image";
 import { AppIcon, type IconName } from "@/components/app-icon";
 import { PlatformStrip } from "@/components/platform-strip";
 import { PrimaryButton } from "@/components/primary-button";
+import { absoluteUrl, breadcrumbSchema, createPageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "About DevProdigee",
-  description:
-    "Meet the team helping eCommerce brands manage marketplaces, improve storefronts and build clearer day-to-day operations.",
+  description: "Meet the connected eCommerce team helping brands manage marketplaces, improve storefronts and build clearer day-to-day operations.",
+  path: "/about",
+  keywords: ["DevProdigee eCommerce agency", "eCommerce specialists", "marketplace management team"],
+});
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": `${absoluteUrl("/about")}#webpage`,
+  url: absoluteUrl("/about"),
+  name: "About DevProdigee",
+  description: "The mission, specialists and working approach behind DevProdigee eCommerce.",
+  about: { "@id": `${absoluteUrl("/")}#organization` },
 };
 
 const trustPoints = [
@@ -152,6 +164,10 @@ function IconBadge({ name, dark = false }: { name: IconName; dark?: boolean }) {
 export default function AboutPage() {
   return (
     <div className="overflow-hidden bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([
+        aboutSchema,
+        breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About Us", path: "/about" }]),
+      ])} />
       <section className="relative border-b border-slate-200 bg-[#f4f8fc] pb-14 pt-28 sm:pb-16 sm:pt-32 lg:pb-20 lg:pt-36">
         <div className="surface-grid absolute inset-0 opacity-60" />
         <div className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-[#166CD2]/10 blur-3xl" />

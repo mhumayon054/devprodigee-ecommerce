@@ -2,15 +2,32 @@ import type { Metadata } from "next";
 import { AppIcon } from "@/components/app-icon";
 import { ContactForm } from "@/components/contact-form";
 import { site } from "@/data/site";
+import { absoluteUrl, breadcrumbSchema, createPageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Contact DevProdigee eCommerce to discuss marketplace management, store development, listing optimisation, advertising or multi-channel growth.",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact DevProdigee",
+  description: "Contact DevProdigee to discuss marketplace management, Shopify or WooCommerce development, listing optimisation, PPC or eCommerce reporting.",
+  path: "/contact",
+  keywords: ["contact eCommerce agency", "hire marketplace management agency", "eCommerce consultation"],
+});
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": `${absoluteUrl("/contact")}#webpage`,
+  url: absoluteUrl("/contact"),
+  name: "Contact DevProdigee",
+  description: "Contact DevProdigee eCommerce to discuss a marketplace, storefront or growth requirement.",
+  mainEntity: { "@id": `${absoluteUrl("/")}#organization` },
 };
 
 export default function ContactPage() {
   return (
     <div className="bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_70%)]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([
+        contactSchema,
+        breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]),
+      ])} />
       <section className="pb-20 pt-32 sm:pb-24 sm:pt-36 lg:pt-40">
         <div className="container-shell grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
           <aside className="lg:sticky lg:top-8">

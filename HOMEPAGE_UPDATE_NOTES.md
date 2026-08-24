@@ -1,4 +1,4 @@
-# Homepage Update — 21 Aug 2026
+# Homepage Update: 21 Aug 2026
 
 This package is intended to be extracted into the existing project root with overwrite enabled.
 

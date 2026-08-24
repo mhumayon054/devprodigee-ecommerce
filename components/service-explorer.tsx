@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AppIcon } from "@/components/app-icon";
+import { coreServiceHrefs } from "@/data/seo-services";
 import { services } from "@/data/site";
 
 export function ServiceExplorer() {
@@ -83,9 +84,12 @@ export function ServiceExplorer() {
           ))}
         </div>
 
-        <a href="/contact" className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#166CD2] transition hover:text-[#105db8]">
-          Discuss this service <AppIcon name="arrow" size={17} />
-        </a>
+        <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
+          <a href={coreServiceHrefs[activeService.slug] ?? `/services#${activeService.slug}`} className="inline-flex items-center gap-2 text-sm font-bold text-[#166CD2] transition hover:text-[#105db8]">
+            View full service details <AppIcon name="arrow" size={17} />
+          </a>
+          <a href="/contact" className="text-sm font-bold text-slate-600 transition hover:text-[#166CD2]">Discuss this service</a>
+        </div>
       </article>
     </div>
   );

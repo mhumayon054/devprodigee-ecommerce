@@ -14,8 +14,6 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const lastScrollY = useRef(0);
 
-  useEffect(() => setOpen(false), [pathname]);
-
   useEffect(() => {
     lastScrollY.current = window.scrollY;
     const onScroll = () => {
@@ -66,12 +64,12 @@ export function SiteHeader() {
             {navigation.map((item) => {
               const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
               return (
-                <Link key={item.to} href={item.to} className={`rounded-xl px-4 py-3 text-base font-semibold hover:bg-[#166CD2]/[0.07] hover:text-[#166CD2] ${active ? "bg-[#166CD2]/[0.08] text-[#166CD2]" : "text-[#2B3543]"}`}>
+                <Link key={item.to} href={item.to} onClick={() => setOpen(false)} className={`rounded-xl px-4 py-3 text-base font-semibold hover:bg-[#166CD2]/[0.07] hover:text-[#166CD2] ${active ? "bg-[#166CD2]/[0.08] text-[#166CD2]" : "text-[#2B3543]"}`}>
                   {item.label}
                 </Link>
               );
             })}
-            <Link href="/contact" className="mt-2 rounded-xl bg-[#166CD2] px-4 py-3 text-center text-sm font-bold text-white">Book a free call</Link>
+            <Link href="/contact" onClick={() => setOpen(false)} className="mt-2 rounded-xl bg-[#166CD2] px-4 py-3 text-center text-sm font-bold text-white">Book a free call</Link>
           </nav>
         </div>
       ) : null}

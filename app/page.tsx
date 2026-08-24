@@ -7,11 +7,28 @@ import { PlatformStrip } from "@/components/platform-strip";
 import { PrimaryButton } from "@/components/primary-button";
 import { RotatingHeroHeadline } from "@/components/rotating-hero-headline";
 import { SectionHeading } from "@/components/section-heading";
+import { coreServiceHrefs } from "@/data/seo-services";
 import { caseStudies, services } from "@/data/site";
+import { absoluteUrl, createPageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Marketplace Growth Agency",
-  description: "Scale your eCommerce business across Amazon, Walmart, Shopify, TikTok Shop, Etsy, eBay and WooCommerce with one coordinated specialist team.",
+export const metadata: Metadata = createPageMetadata({
+  title: "eCommerce Marketplace Management Agency | DevProdigee",
+  description: "Grow across Amazon, eBay, Walmart, Shopify, Etsy, TikTok Shop and WooCommerce with one marketplace management and eCommerce growth team.",
+  path: "/",
+  absoluteTitle: true,
+  keywords: ["eCommerce marketplace management agency", "marketplace growth agency", "eCommerce agency"],
+});
+
+const homePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${absoluteUrl("/")}#webpage`,
+  url: absoluteUrl("/"),
+  name: "eCommerce Marketplace Management Agency | DevProdigee",
+  description: "Marketplace management, storefront development and eCommerce growth support across seven major commerce platforms.",
+  isPartOf: { "@id": `${absoluteUrl("/")}#website` },
+  about: { "@id": `${absoluteUrl("/")}#organization` },
+  inLanguage: "en",
 };
 
 const homeBenefits = [
@@ -23,6 +40,7 @@ const homeBenefits = [
 export default function HomePage() {
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(homePageSchema)} />
       <section className="relative overflow-hidden border-b border-slate-200/70 bg-[#eef5fb] pb-7 pt-24 sm:pb-8 sm:pt-28 lg:pb-9 lg:pt-28">
         <video className="absolute inset-0 h-full w-full object-cover object-center opacity-70" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
           <source src="/tech-network.mp4" type="video/mp4" />
@@ -99,7 +117,7 @@ export default function HomePage() {
             {services.map((service) => (
               <Link
                 key={service.slug}
-                href={`/services#${service.slug}`}
+                href={coreServiceHrefs[service.slug] ?? `/services#${service.slug}`}
                 className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_8px_28px_rgba(43,53,67,0.05)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_14px_36px_rgba(22,108,210,0.10)] sm:p-5"
               >
                 <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#166CD2]/10 text-[#166CD2] transition group-hover:bg-[#166CD2] group-hover:text-white sm:h-10 sm:w-10">

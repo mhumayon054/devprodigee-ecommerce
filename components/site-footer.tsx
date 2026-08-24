@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AppIcon } from "@/components/app-icon";
 import { FooterServiceLinks } from "@/components/footer-service-links";
 import { LogoMark } from "@/components/logo-mark";
+import { platformPageHrefs } from "@/data/seo-services";
 import { platforms, site } from "@/data/site";
 
 export function SiteFooter() {
@@ -15,11 +16,11 @@ export function SiteFooter() {
               We turn ambitious brands into category leaders through connected commerce systems built for measurable, sustainable growth.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-y-2" aria-label="Supported platforms">
-              {platforms.slice(0, 5).map((platform, index) => (
+              {platforms.map((platform, index) => (
                 <span key={platform.name} className="platform-nav-item inline-flex items-center">
                   {index > 0 ? <span className="platform-divider mx-2.5 text-blue-300/45" aria-hidden="true">|</span> : null}
                   <Link
-                    href="/services#platforms"
+                    href={platformPageHrefs[platform.name] ?? "/services"}
                     className="platform-footer-link text-xs font-semibold text-slate-300"
                   >
                     {platform.name}
