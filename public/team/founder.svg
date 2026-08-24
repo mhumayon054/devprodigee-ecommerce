@@ -1,0 +1,23 @@
+<svg width="1200" height="960" viewBox="0 0 1200 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="110" y1="70" x2="1080" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF3FF"/>
+      <stop offset="1" stop-color="#B9D8F8"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="430" y1="600" x2="760" y2="940" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B3543"/>
+      <stop offset="1" stop-color="#166CD2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="960" rx="54" fill="url(#bg)"/>
+  <circle cx="1015" cy="165" r="200" fill="#166CD2" fill-opacity="0.11"/>
+  <circle cx="155" cy="810" r="250" fill="#FFFFFF" fill-opacity="0.48"/>
+  <path d="M0 720C240 650 384 726 583 682C805 633 960 492 1200 535V960H0V720Z" fill="#FFFFFF" fill-opacity="0.42"/>
+  <circle cx="600" cy="384" r="162" fill="#E9B78E"/>
+  <path d="M445 357C459 221 538 165 622 169C731 173 790 248 769 395C727 340 683 308 609 294C552 283 500 307 445 357Z" fill="#243247"/>
+  <path d="M375 914C387 696 468 579 600 579C732 579 813 696 825 914H375Z" fill="url(#shirt)"/>
+  <path d="M530 570L600 661L670 570" fill="#F8FAFC"/>
+  <circle cx="539" cy="391" r="10" fill="#243247"/>
+  <circle cx="661" cy="391" r="10" fill="#243247"/>
+  <path d="M555 467C582 487 618 487 645 467" stroke="#9A5D4C" stroke-width="10" stroke-linecap="round"/>
+</svg>

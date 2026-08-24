@@ -1,0 +1,13 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="80" y1="30" x2="720" y2="470" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF2F6"/><stop offset="1" stop-color="#E7D9FF"/></linearGradient></defs>
+  <rect width="800" height="500" rx="40" fill="url(#bg)"/>
+  <circle cx="660" cy="105" r="145" fill="#A855F7" fill-opacity="0.1"/>
+  <circle cx="400" cy="205" r="92" fill="#E2A27A"/>
+  <path d="M304 225C294 140 342 79 408 80C481 80 519 136 496 233C470 185 437 162 393 163C355 164 327 186 304 225Z" fill="#563A32"/>
+  <path d="M286 174C288 113 336 58 402 65C463 72 501 121 498 182C449 130 355 127 286 174Z" fill="#563A32"/>
+  <path d="M245 490C259 342 312 286 400 286C488 286 541 342 555 490H245Z" fill="#7C3AED"/>
+  <circle cx="367" cy="210" r="6" fill="#243247"/><circle cx="433" cy="210" r="6" fill="#243247"/>
+  <path d="M376 250C390 260 410 260 424 250" stroke="#9A5D4C" stroke-width="6" stroke-linecap="round"/>
+  <rect x="28" y="28" width="178" height="44" rx="22" fill="white" fill-opacity="0.85"/>
+  <text x="117" y="57" text-anchor="middle" fill="#7C3AED" font-family="Arial, sans-serif" font-size="17" font-weight="700">DEMO PROFILE</text>
+</svg>

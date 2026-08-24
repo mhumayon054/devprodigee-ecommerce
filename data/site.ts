@@ -29,8 +29,10 @@ export const services = [
     icon: 'store',
     title: 'Marketplace Management',
     description:
-      'Day-to-day marketplace control across Amazon, Walmart, eBay, Etsy and TikTok Shop — catalogue, account health, inventory and orders.',
-    features: ['Account setup and health', 'Inventory and order workflows', 'Performance monitoring'],
+      'Day-to-day marketplace control across Amazon, Walmart, eBay, Etsy and TikTok Shop, including catalogue, account health, inventory and orders.',
+    bestFor: 'You need reliable control of daily marketplace work.',
+    outcome: 'Fewer operational gaps and clearer account ownership.',
+    features: ['Account setup and health', 'Catalogue and listing upkeep', 'Inventory and order workflows', 'Performance monitoring'],
   },
   {
     slug: 'store-development',
@@ -38,7 +40,9 @@ export const services = [
     title: 'Store Development',
     description:
       'Shopify and WooCommerce builds or redesigns focused on mobile UX, speed, checkout flow and conversion.',
-    features: ['Custom storefront design', 'App and payment integrations', 'Speed and UX optimisation'],
+    bestFor: 'Your current store is slow, dated or difficult to buy from.',
+    outcome: 'A faster storefront with a clearer path to purchase.',
+    features: ['Custom storefront design', 'App and payment integrations', 'Speed and UX optimisation', 'Ongoing technical support'],
   },
   {
     slug: 'listing-optimisation',
@@ -46,7 +50,9 @@ export const services = [
     title: 'Listing Optimisation & SEO',
     description:
       'Search-led titles, attributes and product copy built around how buyers actually find and compare products.',
-    features: ['Marketplace keyword research', 'SEO-led product copy', 'Continuous listing refinement'],
+    bestFor: 'Products are live but not earning enough visibility or clicks.',
+    outcome: 'Stronger search relevance and easier product comparison.',
+    features: ['Marketplace keyword research', 'SEO-led product copy', 'Categories and item specifics', 'Continuous listing refinement'],
   },
   {
     slug: 'ppc-advertising',
@@ -54,7 +60,9 @@ export const services = [
     title: 'PPC & Performance Advertising',
     description:
       'Campaign setup, budgets and ongoing optimisation with spend tied to agreed commercial KPIs.',
-    features: ['Campaign setup and structure', 'Bid and budget optimisation', 'Actionable reporting'],
+    bestFor: 'Spend is active but profitable growth is difficult to judge.',
+    outcome: 'Campaign decisions tied to agreed commercial KPIs.',
+    features: ['Campaign setup and structure', 'Bid and budget optimisation', 'Search term analysis', 'Actionable reporting'],
   },
   {
     slug: 'creative-branding',
@@ -62,7 +70,9 @@ export const services = [
     title: 'Creative Design & Branding',
     description:
       'Storefront graphics, product imagery and marketplace content built to explain the product quickly and clearly.',
-    features: ['Marketplace creative', 'Amazon A+ Content', 'Brand-consistent visual systems'],
+    bestFor: 'Your product looks inconsistent or is difficult to understand.',
+    outcome: 'Clearer visual communication across listings and storefronts.',
+    features: ['Marketplace creative', 'Amazon A+ Content', 'Storefront visual assets', 'Brand-consistent design systems'],
   },
   {
     slug: 'analytics-reporting',
@@ -70,7 +80,9 @@ export const services = [
     title: 'Analytics & Reporting',
     description:
       'Lean reporting that shows which KPIs changed, why they changed and what action should come next.',
-    features: ['KPI tracking', 'Growth opportunity analysis', 'Transparent monthly reporting'],
+    bestFor: 'You receive data but still do not know what to do next.',
+    outcome: 'Focused reporting with clear practical priorities.',
+    features: ['KPI tracking', 'Growth opportunity analysis', 'Channel performance reviews', 'Transparent monthly reporting'],
   },
 ]
 

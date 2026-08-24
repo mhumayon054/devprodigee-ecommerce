@@ -1,0 +1,12 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="70" y1="30" x2="730" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#EAF3FF"/><stop offset="1" stop-color="#CDE5FF"/></linearGradient></defs>
+  <rect width="800" height="500" rx="40" fill="url(#bg)"/>
+  <circle cx="670" cy="95" r="135" fill="#166CD2" fill-opacity="0.1"/>
+  <circle cx="400" cy="205" r="92" fill="#D89A72"/>
+  <path d="M311 193C320 112 370 79 418 82C487 86 514 139 489 224C457 187 429 170 385 167C358 165 334 176 311 193Z" fill="#283548"/>
+  <path d="M245 490C259 342 312 286 400 286C488 286 541 342 555 490H245Z" fill="#166CD2"/>
+  <circle cx="367" cy="210" r="6" fill="#243247"/><circle cx="433" cy="210" r="6" fill="#243247"/>
+  <path d="M376 250C390 260 410 260 424 250" stroke="#915844" stroke-width="6" stroke-linecap="round"/>
+  <rect x="28" y="28" width="178" height="44" rx="22" fill="white" fill-opacity="0.85"/>
+  <text x="117" y="57" text-anchor="middle" fill="#166CD2" font-family="Arial, sans-serif" font-size="17" font-weight="700">DEMO PROFILE</text>
+</svg>
