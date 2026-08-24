@@ -19,6 +19,16 @@ const trustBar = [
   { value: "100%", label: "Client asset ownership" },
 ];
 
+const orbitPlatforms = [
+  { ...platforms.find((platform) => platform.name === "Amazon")!, position: "left-1/2 top-[18%]" },
+  { ...platforms.find((platform) => platform.name === "eBay")!, position: "left-[24%] top-[31%]" },
+  { ...platforms.find((platform) => platform.name === "Walmart")!, position: "left-[76%] top-[31%]" },
+  { ...platforms.find((platform) => platform.name === "Etsy")!, position: "left-[15%] top-[54%]" },
+  { ...platforms.find((platform) => platform.name === "Shopify")!, position: "left-[85%] top-[54%]" },
+  { ...platforms.find((platform) => platform.name === "WooCommerce")!, position: "left-[31%] top-[77%]" },
+  { ...platforms.find((platform) => platform.name === "TikTok Shop")!, position: "left-[69%] top-[77%]" },
+];
+
 const engagementOptions = [
   {
     number: "01",
@@ -107,30 +117,66 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="mx-auto w-full max-w-[520px] lg:justify-self-end">
-            <div className="overflow-hidden rounded-[28px] bg-[#2B3543] text-white shadow-[0_24px_70px_rgba(43,53,67,0.2)]">
-              <div className="p-6 sm:p-7">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">Platform coverage</p>
-                <h2 className="mt-3 text-2xl font-bold leading-tight sm:text-3xl">Built for multi-channel commerce.</h2>
-                <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">Specialist support across the marketplaces and storefronts where your customers already shop.</p>
+          <div className="mx-auto w-full max-w-[550px] lg:justify-self-end">
+            <div className="commerce-orbit relative aspect-[1.08/1] overflow-hidden rounded-[28px] border border-white bg-white/75 shadow-[0_24px_70px_rgba(43,53,67,0.11)] backdrop-blur-sm">
+              <div className="absolute inset-x-0 top-[4.5%] z-20 text-center">
+                <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-[#166CD2] sm:text-xs">Connected Commerce</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-px bg-slate-300 sm:grid-cols-3">
-                {platforms.map((platform, index) => (
-                  <div key={platform.name} className={`flex min-h-[76px] items-center justify-center bg-white px-4 py-4 ${index === platforms.length - 1 ? "col-span-2 sm:col-span-1" : ""}`}>
-                    <div className="flex h-8 w-full items-center justify-center gap-1.5">
-                      <Image src={platform.logo} alt={`${platform.name} logo`} width={126} height={36} className="h-7 w-[104px] object-contain" />
-                      {platform.qualifier ? <span className="shrink-0 text-[9px] font-extrabold leading-none text-slate-900">{platform.qualifier}</span> : null}
-                    </div>
+              <svg className="absolute inset-0 h-full w-full" viewBox="0 0 540 500" aria-hidden="true">
+                <defs>
+                  <radialGradient id="orbit-glow">
+                    <stop offset="0" stopColor="#166cd2" stopOpacity="0.12" />
+                    <stop offset="1" stopColor="#166cd2" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                <circle cx="270" cy="270" r="148" fill="none" stroke="#bfdbfe" strokeDasharray="4 6" />
+                <circle cx="270" cy="270" r="112" fill="url(#orbit-glow)" />
+                <g stroke="#93c5fd" strokeWidth="1.4">
+                  <line x1="270" y1="270" x2="270" y2="90" />
+                  <line x1="270" y1="270" x2="130" y2="155" />
+                  <line x1="270" y1="270" x2="410" y2="155" />
+                  <line x1="270" y1="270" x2="82" y2="270" />
+                  <line x1="270" y1="270" x2="458" y2="270" />
+                  <line x1="270" y1="270" x2="168" y2="385" />
+                  <line x1="270" y1="270" x2="372" y2="385" />
+                </g>
+                <g fill="#166cd2" stroke="#ffffff" strokeWidth="4">
+                  <circle cx="270" cy="169" r="6" />
+                  <circle cx="180" cy="196" r="6" />
+                  <circle cx="360" cy="196" r="6" />
+                  <circle cx="158" cy="270" r="6" />
+                  <circle cx="382" cy="270" r="6" />
+                  <circle cx="203" cy="341" r="6" />
+                  <circle cx="337" cy="341" r="6" />
+                </g>
+              </svg>
+
+              <div className="absolute left-1/2 top-[54%] z-10 flex h-[35%] w-[32%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-blue-300 bg-white shadow-[0_0_0_10px_rgba(239,246,255,0.88),0_18px_45px_rgba(22,108,210,0.15)]">
+                <div className="text-center">
+                  <Image src="/icon.webp" alt="DevProdigee" width={86} height={86} className="mx-auto h-auto w-[39%] min-w-10 object-contain" priority />
+                  <strong className="mt-2 block text-[7px] font-bold uppercase leading-none text-[#315fae] sm:text-[9px]">DevProdigee</strong>
+                  <span className="mt-1 block text-[5px] font-bold uppercase tracking-[0.22em] text-[#166CD2] sm:text-[7px]">Commerce Hub</span>
+                </div>
+              </div>
+
+              {orbitPlatforms.map((platform) => (
+                <div
+                  key={platform.name}
+                  className={`absolute z-10 flex h-[18%] w-[17%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-blue-100 bg-white p-[3%] shadow-[0_12px_34px_rgba(43,53,67,0.09)] ${platform.position}`}
+                >
+                  <div className="flex w-full items-center justify-center gap-1">
+                    <Image
+                      src={platform.logo}
+                      alt={`${platform.name} logo`}
+                      width={120}
+                      height={44}
+                      className="h-auto max-h-9 w-full object-contain"
+                    />
+                    {platform.qualifier ? <span className="shrink-0 text-[5px] font-extrabold leading-none text-slate-900 sm:text-[7px]">{platform.qualifier}</span> : null}
                   </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-3 divide-x divide-white/15 px-4 py-5 text-center">
-                {["Manage", "Build", "Grow"].map((item) => (
-                  <span key={item} className="text-xs font-bold uppercase tracking-[0.12em] text-slate-200">{item}</span>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
