@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AppIcon, type IconName } from "@/components/app-icon";
+import { coreServiceHrefs } from "@/data/seo-services";
 
 type Service = {
   slug: string;
@@ -25,7 +26,7 @@ export function ServiceCard({ service }: { service: Service }) {
           </li>
         ))}
       </ul>
-      <Link href={`/services#${service.slug}`} className="mt-auto flex items-center gap-2 pt-7 text-sm font-bold text-[#166CD2]">Explore service <AppIcon name="arrow" size={17} /></Link>
+      <Link href={coreServiceHrefs[service.slug] ?? `/services#${service.slug}`} className="mt-auto flex items-center gap-2 pt-7 text-sm font-bold text-[#166CD2]">Explore service <AppIcon name="arrow" size={17} /></Link>
     </article>
   );
 }

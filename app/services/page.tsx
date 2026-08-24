@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { AppIcon } from "@/components/app-icon";
 import { FaqList } from "@/components/faq-list";
 import { PrimaryButton } from "@/components/primary-button";
 import { ServiceExplorer } from "@/components/service-explorer";
+import { platformPageHrefs, seoServicePages } from "@/data/seo-services";
 import { faqs, platforms } from "@/data/site";
+import { absoluteUrl, breadcrumbSchema, createPageMetadata, faqSchema, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "eCommerce Services",
-  description:
-    "Marketplace management, store development, listing optimisation, paid advertising, creative and reporting for growing eCommerce brands.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "eCommerce Marketplace Services",
+  description: "Marketplace management, Shopify and WooCommerce development, listing optimisation, PPC, creative and reporting for growing eCommerce brands.",
+  path: "/services",
+  keywords: ["eCommerce services agency", "marketplace management services", "eCommerce growth services"],
+});
 
 const trustBar = [
   { value: "7", label: "Commerce platforms" },
@@ -85,8 +89,31 @@ const selectedFaqQuestions = new Set([
 const serviceFaqs = faqs.filter((faq) => selectedFaqQuestions.has(faq.question));
 
 export default function ServicesPage() {
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${absoluteUrl("/services")}#webpage`,
+    url: absoluteUrl("/services"),
+    name: "eCommerce Marketplace Services",
+    description: "Marketplace management, store development, listing optimisation, PPC, creative and analytics services.",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: seoServicePages.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: service.metaTitle,
+        url: absoluteUrl(`/services/${service.slug}`),
+      })),
+    },
+  };
+
   return (
     <div className="overflow-hidden bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([
+        servicesSchema,
+        breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }]),
+        faqSchema(serviceFaqs),
+      ])} />
       <section className="relative border-b border-slate-200 bg-[#f4f8fc] pb-14 pt-28 sm:pb-16 sm:pt-32 lg:pb-20 lg:pt-36">
         <div className="surface-grid absolute inset-0 opacity-60" />
         <div className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-[#166CD2]/10 blur-3xl" />
@@ -161,8 +188,10 @@ export default function ServicesPage() {
               </div>
 
               {orbitPlatforms.map((platform) => (
-                <div
+                <Link
                   key={platform.name}
+                  href={platformPageHrefs[platform.name] ?? "/services"}
+                  aria-label={`View ${platform.name} services`}
                   className={`absolute z-10 flex h-[18%] w-[17%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-blue-100 bg-white p-[3%] shadow-[0_12px_34px_rgba(43,53,67,0.09)] ${platform.position}`}
                 >
                   <div className="flex w-full items-center justify-center gap-1">
@@ -175,7 +204,7 @@ export default function ServicesPage() {
                     />
                     {platform.qualifier ? <span className="shrink-0 text-[5px] font-extrabold leading-none text-slate-900 sm:text-[7px]">{platform.qualifier}</span> : null}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

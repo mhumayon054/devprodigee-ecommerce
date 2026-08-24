@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { AppIcon } from "@/components/app-icon";
 import { PrimaryButton } from "@/components/primary-button";
 import { caseStudies } from "@/data/site";
+import { absoluteUrl, breadcrumbSchema, createPageMetadata, jsonLd } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -16,7 +17,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params;
   const study = caseStudies.find((item) => item.id === id);
   if (!study) return {};
-  return { title: study.title, description: study.summary };
+  return createPageMetadata({
+    title: study.title,
+    description: study.summary,
+    path: `/portfolio/${study.id}`,
+    image: study.image,
+    imageAlt: `${study.title} reporting evidence`,
+    keywords: ["eCommerce case study", "eBay marketplace growth", study.eyebrow],
+  });
 }
 
 export default async function PortfolioCaseStudyPage({ params }: PageProps) {
@@ -24,8 +32,31 @@ export default async function PortfolioCaseStudyPage({ params }: PageProps) {
   const study = caseStudies.find((item) => item.id === id);
   if (!study) notFound();
 
+  const caseStudySchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${absoluteUrl(`/portfolio/${study.id}`)}#case-study`,
+    url: absoluteUrl(`/portfolio/${study.id}`),
+    name: study.title,
+    headline: study.title,
+    description: study.summary,
+    image: absoluteUrl(study.image),
+    about: ["eBay marketplace management", study.eyebrow],
+    author: { "@id": `${absoluteUrl("/")}#organization` },
+    publisher: { "@id": `${absoluteUrl("/")}#organization` },
+    inLanguage: "en",
+  };
+
   return (
     <div className="overflow-hidden bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([
+        caseStudySchema,
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Portfolio", path: "/portfolio" },
+          { name: study.title, path: `/portfolio/${study.id}` },
+        ]),
+      ])} />
       <section className="portfolio-hero relative border-b border-blue-100/70 pb-14 pt-28 sm:pt-32 lg:pb-20 lg:pt-36">
         <div className="surface-grid absolute inset-0 opacity-25" />
         <div className="container-shell relative">

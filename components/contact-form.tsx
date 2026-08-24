@@ -147,6 +147,12 @@ export function ContactForm() {
       setForm(initialForm);
       setServiceError(false);
       setSubmissionState("success");
+      const analyticsWindow = window as typeof window & { gtag?: (...args: unknown[]) => void };
+      analyticsWindow.gtag?.("event", "generate_lead", {
+        event_category: "contact",
+        form_name: "project_enquiry",
+        service_count: form.services.length,
+      });
     } catch (error) {
       setSubmissionState("error");
       setStatusMessage(error instanceof Error ? error.message : "We could not send your enquiry. Please try again.");

@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       message: escapeHtml(message).replaceAll("\n", "<br />"),
     };
 
-    const subject = `New website enquiry from ${name}${company ? ` — ${company}` : ""}`;
+    const subject = `New website enquiry from ${name}${company ? ` | ${company}` : ""}`;
     const text = [
       "A new project enquiry was submitted on the DevProdigee eCommerce website.",
       "",

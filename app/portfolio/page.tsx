@@ -4,12 +4,32 @@ import Link from "next/link";
 import { AppIcon } from "@/components/app-icon";
 import { PortfolioGallery } from "@/components/portfolio-gallery";
 import { PrimaryButton } from "@/components/primary-button";
-import { platforms } from "@/data/site";
+import { caseStudies, platforms } from "@/data/site";
+import { absoluteUrl, breadcrumbSchema, createPageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Portfolio & eCommerce Case Studies",
-  description:
-    "Explore verified marketplace work covering eBay sales growth, listing visibility, account operations and reporting.",
+export const metadata: Metadata = createPageMetadata({
+  title: "eCommerce Portfolio and Case Studies",
+  description: "Explore marketplace case studies covering eBay sales growth, listing visibility, account operations, Seller Hub reporting and measurable results.",
+  path: "/portfolio",
+  keywords: ["eCommerce case studies", "marketplace management portfolio", "eBay account management case study"],
+});
+
+const portfolioSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${absoluteUrl("/portfolio")}#webpage`,
+  url: absoluteUrl("/portfolio"),
+  name: "DevProdigee eCommerce Portfolio and Case Studies",
+  description: "Published marketplace evidence covering sales, listing visibility, orders and operating improvements.",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: caseStudies.map((study, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: study.title,
+      url: absoluteUrl(`/portfolio/${study.id}`),
+    })),
+  },
 };
 
 const overviewMetrics = [
@@ -31,6 +51,10 @@ export default function PortfolioPage() {
 
   return (
     <div className="overflow-hidden bg-[#fbfcff]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([
+        portfolioSchema,
+        breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Portfolio", path: "/portfolio" }]),
+      ])} />
       <section className="portfolio-hero relative min-h-[760px] border-b border-blue-100/70 pb-16 pt-28 sm:pt-32 lg:min-h-[850px] lg:pb-24 lg:pt-36">
         <div className="surface-grid absolute inset-0 opacity-30" />
         <div className="absolute -left-36 top-36 h-96 w-96 rounded-full bg-violet-300/20 blur-3xl" />

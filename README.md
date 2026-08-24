@@ -1,4 +1,4 @@
-# DevProdigee eCommerce — Next.js Website
+# DevProdigee eCommerce: Next.js Website
 
 A responsive multi-page eCommerce growth agency website built in **Next.js 16, React 19, TypeScript and Tailwind CSS**.
 

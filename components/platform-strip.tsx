@@ -1,16 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
+import { platformPageHrefs } from "@/data/seo-services";
 import { platforms } from "@/data/site";
 
 type Props = { label?: string; variant?: "default" | "compact" };
 
 function PlatformLogo({ platform, compact = false }: { platform: (typeof platforms)[number]; compact?: boolean }) {
   return (
-    <div className={compact ? "flex h-10 w-[148px] shrink-0 items-center justify-center rounded-xl border border-white/60 bg-white/[0.45] px-4 sm:w-[166px]" : "flex min-h-[74px] items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 px-3 py-4 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50/40"} title={platform.name}>
+    <Link href={platformPageHrefs[platform.name] ?? "/services"} className={compact ? "flex h-10 w-[148px] shrink-0 items-center justify-center rounded-xl border border-white/60 bg-white/[0.45] px-4 sm:w-[166px]" : "flex min-h-[74px] items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 px-3 py-4 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50/40"} title={`${platform.name} services`}>
       <div className={compact ? "flex h-6 w-full items-center justify-center gap-1" : "flex h-9 w-full items-center justify-center gap-1.5"}>
         <Image src={platform.logo} alt={`${platform.name} logo`} width={126} height={36} className={compact ? "h-5 w-[94px] object-contain opacity-90" : "h-8 w-[112px] object-contain"} />
         {platform.qualifier ? <span className={compact ? "shrink-0 text-[8px] font-extrabold leading-none text-slate-900/80" : "shrink-0 text-[11px] font-extrabold leading-none text-slate-900"}>{platform.qualifier}</span> : null}
       </div>
-    </div>
+    </Link>
   );
 }
 

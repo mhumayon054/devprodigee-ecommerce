@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AppIcon, type IconName } from "@/components/app-icon";
+import { coreServiceHrefs } from "@/data/seo-services";
 import { services } from "@/data/site";
 
 export function FooterServiceLinks() {
@@ -8,7 +9,7 @@ export function FooterServiceLinks() {
       {services.slice(0, 5).map((service) => (
         <li key={service.slug} className="group relative w-fit max-w-full">
           <Link
-            href={`/services#${service.slug}`}
+            href={coreServiceHrefs[service.slug] ?? `/services#${service.slug}`}
             className="footer-service-link block max-w-full transition-colors duration-200 hover:text-white focus-visible:text-white focus-visible:outline-none"
             aria-describedby={`footer-service-${service.slug}`}
           >
