@@ -1,155 +1,141 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { AppIcon, type IconName } from "@/components/app-icon";
-import { CaseStudyCard } from "@/components/case-study-card";
-import { PageHero } from "@/components/page-hero";
+import Link from "next/link";
+import { AppIcon } from "@/components/app-icon";
+import { PortfolioGallery } from "@/components/portfolio-gallery";
 import { PrimaryButton } from "@/components/primary-button";
-import { SectionHeading } from "@/components/section-heading";
-import { caseStudies } from "@/data/site";
+import { platforms } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Portfolio & eCommerce Case Studies",
-  description: "Explore verified eBay marketplace case studies covering sales growth, listing visibility, order management and inventory organisation.",
+  description:
+    "Explore verified marketplace work covering eBay sales growth, listing visibility, account operations and reporting.",
 };
 
 const overviewMetrics = [
-  { value: "100%", label: "year-over-year growth in the featured transformation" },
-  { value: "£1,716.15", label: "gross sales in the featured reporting period" },
-  { value: "3.18M+", label: "listing impressions recorded" },
-  { value: "301", label: "units sold in the featured case study" },
+  { value: "100%", label: "Year-over-year growth" },
+  { value: "£1,716", label: "Gross sales recorded" },
+  { value: "3.18M+", label: "Listing impressions" },
+  { value: "301", label: "Units sold" },
 ];
 
-const evidencePrinciples = [
-  { icon: "chart", title: "Verified metrics", text: "Performance figures are tied to supplied marketplace reporting snapshots." },
-  { icon: "search", title: "Clear context", text: "Each result is explained through the original challenge and work completed." },
-  { icon: "target", title: "Commercial relevance", text: "We focus on visibility, sales, conversion and operations rather than vanity metrics." },
+const capabilities = [
+  "Marketplace management",
+  "Listing optimisation",
+  "Seller Hub analytics",
+  "Inventory workflows",
 ];
 
 export default function PortfolioPage() {
+  const ebay = platforms.find((platform) => platform.name === "eBay");
+
   return (
-    <div>
-      <PageHero
-        eyebrow="Portfolio"
-        title="eCommerce case studies with the performance context behind the numbers"
-        description="See how listing optimisation, Seller Hub analytics, catalogue organisation and operational workflows contributed to stronger marketplace visibility, sales and scalability."
-        actions={
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <PrimaryButton href="#case-studies" variant="white" arrow>Explore the case studies</PrimaryButton>
-            <PrimaryButton href="/contact" variant="ghost-white">Discuss your goals</PrimaryButton>
-          </div>
-        }
-      />
+    <div className="overflow-hidden bg-[#fbfcff]">
+      <section className="portfolio-hero relative min-h-[760px] border-b border-blue-100/70 pb-16 pt-28 sm:pt-32 lg:min-h-[850px] lg:pb-24 lg:pt-36">
+        <div className="surface-grid absolute inset-0 opacity-30" />
+        <div className="absolute -left-36 top-36 h-96 w-96 rounded-full bg-violet-300/20 blur-3xl" />
+        <div className="absolute -right-28 bottom-12 h-[430px] w-[430px] rounded-full bg-cyan-300/20 blur-3xl" />
 
-      <section className="relative z-10 -mt-8 px-5 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_20px_70px_rgba(43,53,67,0.13)] sm:grid-cols-2 lg:grid-cols-4 lg:p-8">
-          {overviewMetrics.map((metric) => (
-            <div key={metric.label} className="border-slate-100 lg:border-r lg:last:border-r-0 lg:px-5">
-              <strong className="block text-3xl font-bold text-[#166CD2]">{metric.value}</strong>
-              <span className="mt-2 block text-xs font-semibold leading-5 text-slate-500">{metric.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="container-shell grid items-center gap-12 lg:grid-cols-[.88fr_1.12fr]">
+        <div className="container-shell relative grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-16">
           <div>
-            <SectionHeading eyebrow="Featured transformation" title="From underperforming listings to a repeatable eBay growth system" description="The featured before-and-after story shows what changed when listing improvements, analytics review and marketplace operations were managed as one continuous programme." />
-            <div className="mt-7 space-y-4">
-              {["Optimised titles, descriptions, keywords and item specifics.", "Used Seller Hub performance data to guide continuous improvements.", "Strengthened inventory organisation and day-to-day operating workflows."].map((point) => (
-                <div key={point} className="flex items-start gap-3 text-sm font-semibold leading-7 text-slate-600">
-                  <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-50 text-[#166CD2]"><AppIcon name="check" size={13} /></span>
-                  {point}
+            <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/80 px-4 py-2 text-xs font-bold text-[#315fae] shadow-sm backdrop-blur-sm transition hover:border-blue-300">
+              <AppIcon name="arrow" size={15} className="rotate-180" /> Back to Home
+            </Link>
+
+            <p className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#202936] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" /> Our Portfolio
+            </p>
+            <h1 className="mt-6 max-w-2xl text-5xl font-bold leading-[.98] tracking-[-0.055em] text-[#202936] sm:text-6xl lg:text-[72px]">
+              Marketplace work that moved the numbers.
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+              Real reporting, clear commercial context and the work completed behind every published result.
+            </p>
+
+            <div className="mt-9 grid max-w-[540px] grid-cols-2 gap-3">
+              {overviewMetrics.map((metric, index) => (
+                <div key={metric.label} className="group relative overflow-hidden rounded-2xl border border-white bg-white/90 px-5 py-5 shadow-[0_12px_36px_rgba(43,53,67,0.08)] backdrop-blur-sm sm:px-6">
+                  <span className="absolute -bottom-3 right-3 text-5xl font-bold text-[#166CD2]/[0.035]">0{index + 1}</span>
+                  <strong className={`relative block text-3xl font-bold tracking-[-0.04em] ${index % 2 === 0 ? "text-[#166CD2]" : "text-[#202936]"}`}>{metric.value}</strong>
+                  <span className="relative mt-2 block border-t border-slate-200 pt-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">{metric.label}</span>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="relative min-h-[420px] overflow-hidden rounded-[32px] border border-slate-200 bg-slate-50 shadow-[0_20px_65px_rgba(43,53,67,0.11)]">
-            <Image src="/case-studies/ebay-before-after.png" alt="eBay store before and after performance comparison" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-contain p-5 sm:p-8" />
-          </div>
-        </div>
-      </section>
 
-      <section id="case-studies" className="section-space scroll-mt-24 bg-slate-50">
-        <div className="container-shell">
-          <SectionHeading eyebrow="Selected work" title="Verified eBay marketplace growth case studies" description="Each case study explains the initial challenge, the work completed and the measurable outcome recorded in Seller Hub reporting." align="center" />
-          <div className="mt-12 grid gap-7 lg:grid-cols-2">
-            {caseStudies.map((study) => <CaseStudyCard key={study.id} study={study} />)}
+            <div className="mt-5 inline-flex items-center gap-3 rounded-full border border-white bg-white/80 px-4 py-2.5 shadow-sm backdrop-blur-sm">
+              {ebay ? <Image src={ebay.logo} alt="eBay" width={48} height={24} className="h-5 w-12 object-contain" /> : null}
+              <span className="h-5 w-px bg-slate-200" />
+              <span className="text-[11px] font-semibold text-slate-600">Evidence from supplied Seller Hub reports</span>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section className="section-space">
-        <div className="container-shell">
-          <SectionHeading eyebrow="Detailed breakdown" title="The work and reasoning behind each result" description="The sections below connect marketplace performance with the specific optimisation and operating changes that produced it." align="center" />
-          <div className="mt-14 space-y-10">
-            {caseStudies.map((study, index) => (
-              <article id={study.id} key={study.id} className="scroll-mt-28 overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_65px_rgba(43,53,67,0.08)]">
-                <div className={`grid lg:grid-cols-2 ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-                  <div className="relative min-h-[310px] bg-slate-100 sm:min-h-[390px]">
-                    <Image src={study.image} alt={`${study.title} marketplace performance snapshot`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain p-5 sm:p-8" />
-                  </div>
-                  <div className="p-7 sm:p-10">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#166CD2]">{study.eyebrow}</p>
-                    <h2 className="mt-4 text-3xl font-bold leading-tight text-[#2B3543]">{study.title}</h2>
-                    <p className="mt-5 text-sm leading-7 text-slate-600">{study.summary}</p>
-                    <div className="mt-7 grid grid-cols-3 gap-3 border-y border-slate-100 py-5">
-                      {study.metrics.map((metric) => (
-                        <div key={metric.label}>
-                          <strong className="block text-lg font-bold text-[#166CD2] sm:text-xl">{metric.value}</strong>
-                          <span className="mt-1 block text-[11px] font-semibold leading-4 text-slate-500">{metric.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+          <div className="relative mx-auto w-full max-w-[660px] lg:justify-self-end">
+            <div className="absolute -inset-5 rounded-[42px] bg-gradient-to-br from-[#166CD2]/10 via-white/60 to-cyan-200/20 blur-xl" />
+            <div className="relative overflow-hidden rounded-[30px] border border-white bg-white/80 p-3 shadow-[0_28px_90px_rgba(31,54,88,0.16)] backdrop-blur-md sm:p-5">
+              <div className="flex items-center justify-between px-2 pb-4 pt-1">
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#166CD2]">Featured transformation</p>
+                  <p className="mt-1 text-sm font-bold text-[#202936]">eBay marketplace growth programme</p>
                 </div>
-                <div className="grid gap-5 border-t border-slate-100 p-7 sm:p-10 lg:grid-cols-3">
-                  <div className="rounded-2xl bg-slate-50 p-6">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">The challenge</p>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">{study.challenge}</p>
-                  </div>
-                  <div className="rounded-2xl bg-slate-50 p-6">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Our solution</p>
-                    <ul className="mt-3 space-y-3">
-                      {study.solution.map((point) => <li key={point} className="flex items-start gap-2 text-sm leading-6 text-slate-600"><span className="mt-0.5 text-[#166CD2]"><AppIcon name="check" size={16} /></span>{point}</li>)}
-                    </ul>
-                  </div>
-                  <div className="rounded-2xl bg-[#2B3543] p-6 text-white">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-300">The result</p>
-                    <p className="mt-3 text-sm leading-7 text-slate-200">{study.result}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
+                <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-emerald-700">Verified result</span>
+              </div>
+              <div className="relative aspect-[1.8/1] overflow-hidden rounded-[20px] border border-slate-200 bg-[#f6f8fb]">
+                <Image
+                  src="/case-studies/ebay-before-after.png"
+                  alt="eBay marketplace before and after performance evidence"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 52vw, 94vw"
+                  className="object-contain p-3 sm:p-5"
+                />
+              </div>
+              <div className="grid grid-cols-3 divide-x divide-slate-200 px-2 py-5 text-center">
+                <div><strong className="block text-xl font-bold text-[#166CD2] sm:text-2xl">100%</strong><span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.08em] text-slate-500">YoY growth</span></div>
+                <div><strong className="block text-xl font-bold text-[#202936] sm:text-2xl">301</strong><span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.08em] text-slate-500">Units sold</span></div>
+                <div><strong className="block text-xl font-bold text-[#166CD2] sm:text-2xl">£1.7K</strong><span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.08em] text-slate-500">Gross sales</span></div>
+              </div>
+            </div>
+
+            <div className="absolute -bottom-7 -left-4 hidden rounded-2xl border border-white bg-white/90 px-5 py-4 shadow-[0_18px_48px_rgba(43,53,67,0.13)] backdrop-blur-md sm:block">
+              <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400">Published proof</p>
+              <p className="mt-1 text-sm font-bold text-[#202936]">Metrics with commercial context</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-space bg-slate-50">
-        <div className="container-shell grid items-center gap-10 lg:grid-cols-[.78fr_1.22fr]">
+      <section className="border-b border-slate-200 bg-white">
+        <div className="container-shell flex flex-col gap-5 py-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <SectionHeading eyebrow="How we report" title="Evidence first, context always" description="A screenshot alone does not explain why performance changed. Our case-study structure connects the metrics to the work completed, the decisions made and the operational context." />
-            <div className="mt-7"><PrimaryButton href="/contact" arrow>Discuss your growth goals</PrimaryButton></div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#166CD2]">Work represented</p>
+            <p className="mt-1 text-sm font-semibold text-[#202936]">One connected marketplace programme, viewed through four commercial outcomes.</p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-3">
-            {evidencePrinciples.map((item) => (
-              <article key={item.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#166CD2]/10 text-[#166CD2]"><AppIcon name={item.icon as IconName} size={22} /></span>
-                <h3 className="mt-5 text-lg font-bold text-[#2B3543]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
-              </article>
+          <ul className="flex flex-wrap gap-x-6 gap-y-3">
+            {capabilities.map((item) => (
+              <li key={item} className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#166CD2]" /> {item}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <section className="px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[32px] bg-[#166CD2] p-8 text-white sm:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12">
+      <PortfolioGallery />
+
+      <section className="border-t border-blue-100 bg-gradient-to-br from-[#eef4ff] via-[#f7f4ff] to-[#ecfbff] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-center gap-9 rounded-[30px] border border-white bg-white/75 p-7 shadow-[0_24px_70px_rgba(43,53,67,0.09)] backdrop-blur-sm sm:p-10 lg:grid-cols-[1fr_auto] lg:p-12">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-100">Your business could be next</p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-4xl">Turn your current marketplace data into a practical growth roadmap.</h2>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#166CD2]">Your next growth project</p>
+            <h2 className="mt-4 text-3xl font-bold leading-tight tracking-[-0.035em] text-[#202936] sm:text-4xl">Bring us the current numbers. We will help define what should move next.</h2>
+            <ul className="mt-6 flex flex-wrap gap-x-7 gap-y-3">
+              {["Clear starting point", "Agreed commercial priority", "Evidence-led reporting"].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-sm font-semibold text-slate-600"><span className="h-1.5 w-1.5 rounded-full bg-[#166CD2]" />{item}</li>
+              ))}
+            </ul>
           </div>
-          <div className="mt-7 shrink-0 lg:mt-0"><PrimaryButton href="/contact" variant="white" arrow>Start a conversation</PrimaryButton></div>
+          <div className="lg:text-right">
+            <PrimaryButton href="/contact" arrow>Discuss your project</PrimaryButton>
+          </div>
         </div>
       </section>
     </div>
